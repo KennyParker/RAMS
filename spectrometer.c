@@ -70,6 +70,8 @@ void* spectrometer(void *p)
     if (error) perror("spectrometer unclosed");
 
     printf("spectrometer finished\n");
+        while( ! *c->FINISHED ) // wait up
+      ;
     return NULL;
 }
 

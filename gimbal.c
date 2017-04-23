@@ -78,6 +78,8 @@ void* gimbalController(void *p)
     sendCommand(basecamUart, SBGC_CMD_MOTORS_OFF, 0, 0);
 
     printf("gimbal finished\n");
+        while( ! *c->FINISHED ) // wait up
+      ;
     return NULL;
 }
 

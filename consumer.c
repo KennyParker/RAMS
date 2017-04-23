@@ -185,6 +185,8 @@ void* consumer(void *p)
 
     printf("consumer mysql left...\n");
     /* Close the statement */
+    
+    /*
     if( vox_stmt != NULL){
 
         printf("vox stmt not null\n");
@@ -197,11 +199,13 @@ void* consumer(void *p)
         }
         printf("stmt closed\n");
     }
+    */
     mysql_close(vox_mysql);
 
     printf("no vox problem\n");
 
     /* Close the statement */
+    /*
     if( spec_stmt != NULL){
         if (mysql_stmt_close(spec_stmt))
         {
@@ -210,6 +214,7 @@ void* consumer(void *p)
           exit(0);
         }    
     }
+    */
     mysql_close(spec_mysql);
     printf("no spec problem\n");
 

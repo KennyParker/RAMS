@@ -8,8 +8,8 @@
 
 #include "control.h"
 #include "spectrometer.h"
-#include "gimbal.h"
 #include "queue.h"
+#include "gimbal.h"
 #include "database.h"
 #include "consumer.h"
 

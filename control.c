@@ -82,6 +82,8 @@ void* controller(void *p)
     *c->STOP = true;
     
     printf("control finished\n");
+    usleep(3.0e6);
+    printf("waited to return\n");
     return 0;
 }
 

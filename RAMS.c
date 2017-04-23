@@ -63,6 +63,7 @@ int main(int argc, char *argv[])
 
     while( ! *control.FINISHED )    // wait for finish
         ;
+    usleep(3.0e6);
 
     pthread_join(t[4], 0);
         printf("join 4\n");
@@ -80,7 +81,6 @@ int main(int argc, char *argv[])
 
     printf("join 0\n");
 
-    usleep(3.0e6);
     return 0;
 }
 

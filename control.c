@@ -34,7 +34,7 @@ void* controller(void *p)
         exit(0);
     }
 
-    if(*c->DESTROY){
+    if(*c->CLEAR){
         destroyAll(mysql);
         printf("tables reinitialized\n");
     }
@@ -85,7 +85,7 @@ void* controller(void *p)
 }
 
 
-void init_control( struct control *control ){
+void init_control( struct control *control, int argc, char *argv[] ){
 
     control->exposure = (int*)malloc(sizeof(int));
     *control->exposure = 1000000; // 1s
@@ -97,22 +97,39 @@ void init_control( struct control *control ){
     *control->STOP = false;
 
     control->DEBUG = (bool*)malloc(sizeof(bool));
-    *control->DEBUG = true;
+    *control->DEBUG = false;
 
     control->OUTPUT = (bool*)malloc(sizeof(bool));
-    *control->OUTPUT = true;
+    *control->OUTPUT = false;
 
     control->READY = (bool*)malloc(sizeof(bool));
     *control->READY = false;
 
-    control->DESTROY = (bool*)malloc(sizeof(bool)); // IF DESTROY IS TRUE, ALL DATA IS CLEARED on every run.
-    *control->DESTROY = true;
+    control->CLEAR = (bool*)malloc(sizeof(bool)); // IF DESTROY IS TRUE, ALL DATA IS CLEARED on every run.
+    *control->CLEAR = true;
 
     control->WRITE_VOXEL = (bool*)malloc(sizeof(bool));
     *control->WRITE_VOXEL = true;
 
     control->WRITE_SPECTRA = (bool*)malloc(sizeof(bool));
-    *control->WRITE_SPECTRA = false;
+    *control->WRITE_SPECTRA = true;
 
+    if( parse_commands( control, argc, argv ) )
+        printf("error in parsing commands\n");
 }
+
+int parse_commands( struct control *control, int argc, char *argv[] )
+{
+    if( arg > 1 ){
+        for( int i=1; i<argc; i++ ){
+            if( argv[i] == 'd' )
+                *control->DEBUG = true;
+            else if( argv[i] == 'c' )
+                *control->CLEAR = true;
+        }
+    }
+}
+    
+
+
 

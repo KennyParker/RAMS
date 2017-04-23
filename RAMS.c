@@ -22,17 +22,17 @@ void* gimbalController(void *p);
 void* spectrometer(void *p);
 void* consumer(void *p);
 
-int main()
+int main(int argc, char *argv[])
 {
     printf("size S :%d\n", SIZE_S);
     printf("size A :%d\n", SIZE_A);
     printf("size L :%d\n", SIZE_L);
 
     struct control control;
-    init_control( &control );
+    init_control( &control, argc, argv );
 
     printf("controls set, DEBUG = %s \n", control.DEBUG?"on":"off");
-   
+
     struct LamportQueue lidar;
     LamportQueue_init( &lidar, LASER_TYPE );
     struct controlQueue lidar_control = { &lidar, &control };
@@ -45,7 +45,7 @@ int main()
     LamportQueue_init( &spectral, SPECTRAL_TYPE );
     struct controlQueue spectral_control = { &spectral, &control };
 
-    struct controlAll all = { &lidar, &angles, &spectral, &control };
+    struct consumeAll all = { &lidar, &angles, &spectral, &control };
 
 
     pthread_t t[5];

@@ -28,10 +28,11 @@ void* gimbalController(void *p)
     if(*c->DEBUG)
         printf( "gimbal queue type: %d \n", queue->type );
 
-    struct angle to_push;
+    struct angle aim;
 
     int i = 1;
-    struct timespec now;
+    int scan_start;
+    struct timespec now, scan;
 
     //struct attitude aim = {0};
     int basecamUart = openUart();
@@ -42,28 +43,35 @@ void* gimbalController(void *p)
 
     SBGC_cmd_control_data cmd_control_data = {0};
     cmd_control_data.mode = SBGC_CONTROL_MODE_ANGLE;
+    cmd_control_data.speedROLL = cmd_control_data.speedPITCH = cmd_control_data.speedYAW = 30 * SBGC_SPEED_SCALE;
 
-    to_push.yaw = 0;
-    to_push.pitch = 0;
-    to_push.roll = 0;
+
+    aim.yaw = 0;
+    aim.pitch = 0;
+    aim.roll = 0;
+
+    clock_gettime(CLOCK_REALTIME, &scan);
+    now = scan;
+    scan_start = (scan.tv_sec - *c->start_time) * 1000 + (scan.tv_nsec) / 1.0e6 ;
 
     sendCommand(basecamUart, SBGC_CMD_MOTORS_ON, 0, 0);
 
     while( !*c->STOP ){
+       
         usleep( A_TIME );
 	    
-        turn( &to_push );
+        turn( &aim, (now.tv_sec - scan_start) * 1000 + (now.tv_nsec) / 1.0e6 );
 
-        cmd_control_data.speedROLL = cmd_control_data.speedPITCH = cmd_control_data.speedYAW = 30 * SBGC_SPEED_SCALE;
-        cmd_control_data.angleROLL = DEGR_OF to_push.roll ;
-        cmd_control_data.anglePITCH = DEGR_OF to_push.pitch ;
-        cmd_control_data.angleYAW =  DEGR_OF to_push.yaw ;
+        cmd_control_data.angleROLL = aim.roll ;
+        cmd_control_data.anglePITCH = aim.pitch ;
+        cmd_control_data.angleYAW =  aim.yaw ;
+        
         sendCommand(basecamUart, SBGC_CMD_CONTROL, &cmd_control_data, sizeof(cmd_control_data));
         
         clock_gettime(CLOCK_REALTIME, &now);
-        to_push.time = (now.tv_sec - *c->start_time) * 1000 + (now.tv_nsec) / 1.0e6 ;
+        aim.time = (now.tv_sec - *c->start_time) * 1000 + (now.tv_nsec) / 1.0e6 ;
 
-        if(LamportQueue_push(queue, (void*)&to_push) ) // all's well
+        if(LamportQueue_push(queue, (void*)&aim) ) // all's well
             i++;
         else if( *c->DEBUG ) printf( "angle queue full\n");
     }
@@ -72,14 +80,23 @@ void* gimbalController(void *p)
     return 0;
 }
 
-void turn(struct angle *spin ){
-    static float yaw=0;
-    static float pitch=0;
-    static float roll=0;
+void turn(struct angle *spin, int time ){
 
-    
+    int period = 100;
+    int yawPeriod = period * 17;
+    int pitchPeriod = period * 39;
+    int rollPeriod = period * 5;
 
-    ;
+    int yawState = time % yawPeriod;
+    int pitchState = time % pitchPeriod;
+    int rollState = time % rollPeriod;
+
+
+    spin->yaw = 90 * sinf( 2 * M_PI * yawState/yawPeriod );
+    spin->pitch = 40 * sinf( 2 * M_PI * pitchState/pitchPeriod );
+    spin->roll = 10 * sinf( 2 * M_PI * rollState/rollPeriod );
+
+    printf("y%f\t p%f\t r%f \n",, spin->yaw, spin->pitch, spin->roll);
 } 
 
 int openUart()

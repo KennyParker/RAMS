@@ -6,7 +6,6 @@
 #include <my_global.h>
 #include <mysql.h>
 
-
 #include "control.h"
 #include "spectrometer.h"
 #include "gimbal.h"

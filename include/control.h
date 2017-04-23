@@ -11,11 +11,11 @@ struct control
     bool *OUTPUT;
 
     bool *READY;
-    bool *DESTROY; // IF DESTROY IS TRUE, ALL DATA IS CLEARED on every run.
+    bool *CLEAR; // IF DESTROY IS TRUE, ALL DATA IS CLEARED on every run.
 
     bool *WRITE_VOXEL;
     bool *WRITE_SPECTRA;
 
 };
 
-void init_control( struct control *control );
+void init_control( struct control *control, int argc, char *argv[] );

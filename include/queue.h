@@ -38,17 +38,18 @@ struct LamportQueue
     struct spectral *s_data;
 };
 
-struct controlAll
+struct controlQueue
+{
+    struct LamportQueue* queue;
+    struct control* control;
+};
+
+
+struct consumeAll
 {
     struct LamportQueue* lidar;
     struct LamportQueue* angles;
     struct LamportQueue* spectral;
-    struct control* control;
-};
-
-struct controlQueue
-{
-    struct LamportQueue* queue;
     struct control* control;
 };
 

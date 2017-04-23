@@ -862,3 +862,4 @@ extern "C" {
 #endif /* __cplusplus */
 
 #endif /* SEABREEZE_WRAPPER_H */
+

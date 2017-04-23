@@ -8,8 +8,8 @@
 #include <mysql.h>
 #include <stdatomic.h>
 
-#include "include/SeaBreezeWrapper.h"
-#include "include/util.h"
+#include "SeaBreezeWrapper.h"
+#include "util.h"
 
 #include "control.h"
 #include "spectrometer.h"

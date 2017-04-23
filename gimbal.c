@@ -15,9 +15,9 @@
 #include "SBGC.h"
 
 #include "control.h"
+#include "queue.h"
 #include "spectrometer.h"
 #include "gimbal.h"
-#include "queue.h"
 
 void* gimbalController(void *p)
 {

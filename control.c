@@ -120,14 +120,16 @@ void init_control( struct control *control, int argc, char *argv[] ){
 
 int parse_commands( struct control *control, int argc, char *argv[] )
 {
-    if( arg > 1 ){
+    if( argc > 1 ){
         for( int i=1; i<argc; i++ ){
             if( argv[i][0] == 'd' )
                 *control->DEBUG = true;
             else if( argv[i][0] == 'c' )
                 *control->CLEAR = true;
+            else return 1;
         }
     }
+    return 0;
 }
     
 

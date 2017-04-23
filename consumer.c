@@ -35,7 +35,7 @@ void* consumer(void *p)
     int mid_gap = (spectrum1.time + spectrum1.exposure/1.0e3 + spectrum2.time) / 2.0;
             // voxels inbetween exposures choose sides based on the mid gap
 
-    MYSQL *mysql = mysql_init(NULL);
+    // MYSQL *mysql = mysql_init(NULL);
 
     MYSQL_STMT    *vox_stmt;
     MYSQL_BIND    vox_bind[BINDS_VOXEL];

@@ -1,3 +1,4 @@
+extern MYSQL *mysql;
 
 struct control
 {
@@ -18,8 +19,6 @@ struct control
     bool *WRITE_SPECTRA;
 
 };
-
-extern MYSQL *mysql;
 
 void init_control( struct control *control, int argc, char *argv[] );
 int parse_commands( struct control *control, int argc, char *argv[] );

@@ -102,7 +102,8 @@ void prepareTable( MYSQL *mysql, MYSQL_STMT *stmt, MYSQL_BIND *bind, enum data_t
 
             // spectra string
             bind[1].buffer_type = MYSQL_TYPE_STRING;
-            bind[1].buffer= (char *)args->encode;
+            //bind[1].buffer= (char *)args->encode;
+            bind[1].buffer= args->encode;
             bind[1].buffer_length= *(args->encode_len);
             bind[1].is_null= 0;
             bind[1].length= 0;
@@ -131,7 +132,8 @@ void prepareTable( MYSQL *mysql, MYSQL_STMT *stmt, MYSQL_BIND *bind, enum data_t
 
             // spectra string
             bind[3].buffer_type = MYSQL_TYPE_STRING;
-            bind[3].buffer= (char *)args->encode;
+            //bind[3].buffer= (char *)args->encode;
+            bind[3].buffer= args->encode;
             bind[3].buffer_length= *(args->encode_len);
             bind[3].is_null= 0;
             bind[3].length= 0;

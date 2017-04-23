@@ -16,7 +16,7 @@
 
 void* consumer(void *p)
 {   
-    struct controlAll *all = (struct controlAll*)p;
+    struct consumeAll *all = (struct consumeAll*)p;
 
     struct LamportQueue *lidar = all->lidar;
     struct LamportQueue *angles = all->angles;

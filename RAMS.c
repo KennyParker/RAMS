@@ -52,14 +52,12 @@ int main(int argc, char *argv[])
     pthread_create(&t[0], 0, controller, &control);
 	while( ! *control.READY ) // wait for control thread
         ;
-    printf("READY\n");
 
     pthread_create(&t[1], 0, laserRangefinder, &lidar_control);
     pthread_create(&t[2], 0, gimbalController, &angles_control);
     pthread_create(&t[3], 0, spectrometer, &spectral_control);
     pthread_create(&t[4], 0, consumer, &all);
 
-    printf("created and not joined\n");
 
     while( ! *control.FINISHED )    // wait for finish
         ;

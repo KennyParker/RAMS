@@ -89,11 +89,18 @@ void* consumer(void *p)
         fprintf(stderr, "%s\n", mysql_error(spec_mysql));
         exit(0);
     }
+    /*
     spec_stmt = mysql_stmt_init(spec_mysql);
     if (!spec_stmt)
     {
         fprintf(stderr, " mysql_stmt_init(), out of memory\n");
         exit(0);
+    }
+    */
+    spec_stmt = mysql_stmt_init(vox_mysql);
+    if (!spec_stmt)
+    {
+        fprintf(stderr, " mysql_stmt_init(), out of memory\n");
     }
 
     // MOCK SPECTRA

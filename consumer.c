@@ -180,8 +180,9 @@ void* consumer(void *p)
     
     } while( ! finished );
     printf("consumer left loop\n");
-    *c->FINISHED = true;
     usleep(4000000);
+    *c->FINISHED = true;
+
 
     printf("consumer mysql left...\n");
     /* Close the statement */

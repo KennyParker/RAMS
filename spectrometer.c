@@ -67,6 +67,7 @@ void* spectrometer(void *p)
     seabreeze_close_spectrometer(0, &error);        // zero = only spectrometer
     if (error) perror("spectrometer unclosed");
 
+    printf("spectrometer finished\n");
     return 0;
 }
 

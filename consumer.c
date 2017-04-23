@@ -178,7 +178,7 @@ void* consumer(void *p)
     
     } while( ! finished );
     
-    
+
     /* Close the statement */
     if (mysql_stmt_close(vox_stmt))
     {
@@ -196,6 +196,7 @@ void* consumer(void *p)
     mysql_close(vox_mysql);
     mysql_close(spec_mysql);
 
+    printf("consumer finished\n");
     return 0;
 }
 

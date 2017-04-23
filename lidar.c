@@ -43,6 +43,7 @@ void* laserRangefinder(void *p)
             exit(0);
         }
     }
+    printf("lidar finished");
     return 0;
 }
 

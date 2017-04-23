@@ -12,9 +12,9 @@
 
 #include "control.h"
 #include "lidar.h"
-#include "gimbal.h"
 #include "spectrometer.h"
 #include "queue.h"
+#include "gimbal.h"
 
 void* controller(void *p);
 void* laserRangefinder(void *p);
@@ -59,10 +59,15 @@ int main(int argc, char *argv[])
     pthread_create(&t[3], 0, spectrometer, &spectral_control);
     pthread_create(&t[4], 0, consumer, &all);
 
+    printf("created and not joined\n");
+
     pthread_join(t[4], 0);
     pthread_join(t[3], 0);
     pthread_join(t[2], 0);
     pthread_join(t[1], 0);
     pthread_join(t[0], 0);
+
+    usleep(3.0e6);
+    return 0;
 }
 

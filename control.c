@@ -81,6 +81,7 @@ void* controller(void *p)
         /*chill*/;
     *c->STOP = true;
     
+    printf("control finished\n");
     return 0;
 }
 

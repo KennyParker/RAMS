@@ -122,9 +122,9 @@ int parse_commands( struct control *control, int argc, char *argv[] )
 {
     if( arg > 1 ){
         for( int i=1; i<argc; i++ ){
-            if( argv[i] == 'd' )
+            if( argv[i][0] == 'd' )
                 *control->DEBUG = true;
-            else if( argv[i] == 'c' )
+            else if( argv[i][0] == 'c' )
                 *control->CLEAR = true;
         }
     }

@@ -19,3 +19,4 @@ struct control
 };
 
 void init_control( struct control *control, int argc, char *argv[] );
+int parse_commands( struct control *control, int argc, char *argv[] );

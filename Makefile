@@ -1,5 +1,5 @@
 TARGET = RAMS
-INC_DIR = ../include
+INC_DIR = ./include
 LIBS = -L/usr/lib/arm-linux-gnueabihf -lmysqlclient -lpthread -lz -lm -ldl -lseabreeze -lwiringPi -lusb -L/usr/include/libusb-1.0/ -L/usr/local/lib
 CC = gcc
 CFLAGS = -std=gnu99 -Wall -I/usr/include/mysql -DBIG_JOINS=1 -fno-strict-aliasing -g -DNDEBUG I$(INC_DIR)
@@ -10,7 +10,7 @@ default: $(TARGET)
 all: default
 
 OBJECTS = $(patsubst %.c, %.o, $(wildcard *.c))
-HEADERS = $(wildcard *.h)
+HEADERS = $(INC_DIR)/(wildcard *.h)
 
 %.o: %.c $(HEADERS)
 	$(CC) $(CFLAGS) -c $< -o $@

@@ -70,7 +70,7 @@ int main(int argc, char *argv[])
     usleep(3.0e6);
 
 
-    mysql_close(spec_mysql);
+    mysql_close(mysql);
 
 
     pthread_join(t[4], NULL);

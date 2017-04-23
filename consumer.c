@@ -130,7 +130,7 @@ void* consumer(void *p)
 
 
     execute(spec_stmt);
-    spectra_id = mysql_insert_id(spec_mysql);
+    spectra_id = mysql_insert_id(mysql);
     if(*c->DEBUG) printf("inserted spectra %d\n", spectra_id);
 
     do{
@@ -166,7 +166,8 @@ void* consumer(void *p)
             array2string(spectrum1.spectrum, encode);
             
             execute(spec_stmt);
-            spectra_id = mysql_insert_id(spec_mysql);
+            spectra_id = mysql_insert_id(mysql);
+
             if(c->DEBUG)
                 printf("inserted spectra %d\n", spectra_id);
         }

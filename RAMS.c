@@ -62,10 +62,20 @@ int main(int argc, char *argv[])
     printf("created and not joined\n");
 
     pthread_join(t[4], 0);
+        printf("join 4\n");
+
     pthread_join(t[3], 0);
+    printf("join 3\n");
+
     pthread_join(t[2], 0);
+
+    printf("join 2\n");
     pthread_join(t[1], 0);
+        printf("join 1\n");
+
     pthread_join(t[0], 0);
+
+    printf("join 0\n");
 
     usleep(3.0e6);
     return 0;

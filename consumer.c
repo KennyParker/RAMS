@@ -181,8 +181,9 @@ void* consumer(void *p)
     } while( ! finished );
     printf("consumer left loop\n");
     *c->FINISHED = true;
+    usleep(4000000);
 
-
+    printf("consumer mysql left...\n");
     /* Close the statement */
     if (mysql_stmt_close(vox_stmt))
     {

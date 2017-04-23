@@ -201,7 +201,7 @@ void* consumer(void *p)
     mysql_close(spec_mysql);
 
     printf("consumer finished\n");
-    return 0;
+    return NULL;
 }
 
 void convert(struct laser *point, struct angle *angle1, struct angle *angle2, int *x, int *y, int *z)

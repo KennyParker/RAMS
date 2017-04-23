@@ -70,7 +70,7 @@ void* spectrometer(void *p)
     if (error) perror("spectrometer unclosed");
 
     printf("spectrometer finished\n");
-    return 0;
+    return NULL;
 }
 
 void auto_correct( double *white_bal, struct control *c )

@@ -44,7 +44,7 @@ void* laserRangefinder(void *p)
         }
     }
     printf("lidar finished");
-    return 0;
+    return NULL;
 }
 
 int lidar_init(bool DEBUG) {

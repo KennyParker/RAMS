@@ -78,7 +78,7 @@ void* gimbalController(void *p)
     sendCommand(basecamUart, SBGC_CMD_MOTORS_OFF, 0, 0);
 
     printf("gimbal finished\n");
-    return 0;
+    return NULL;
 }
 
 void turn(struct angle *spin, int time ){

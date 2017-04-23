@@ -65,19 +65,19 @@ int main(int argc, char *argv[])
         ;
     usleep(3.0e6);
 
-    pthread_join(t[4], 0);
+    pthread_join(t[4], NULL);
         printf("join 4\n");
 
-    pthread_join(t[3], 0);
+    pthread_join(t[3], NULL);
     printf("join 3\n");
 
-    pthread_join(t[2], 0);
+    pthread_join(t[2], NULL);
 
     printf("join 2\n");
-    pthread_join(t[1], 0);
+    pthread_join(t[1], NULL);
         printf("join 1\n");
 
-    pthread_join(t[0], 0);
+    pthread_join(t[0], NULL);
 
     printf("join 0\n");
 

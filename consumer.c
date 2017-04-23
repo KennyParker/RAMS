@@ -200,7 +200,7 @@ void* consumer(void *p)
         printf("stmt closed\n");
     }
     */
-    mysql_close(vox_mysql);
+    // mysql_close(vox_mysql);
 
     printf("no vox problem\n");
 
@@ -215,7 +215,7 @@ void* consumer(void *p)
         }    
     }
     */
-    mysql_close(spec_mysql);
+    // mysql_close(spec_mysql);
     printf("no spec problem\n");
 
 

@@ -48,7 +48,7 @@ void* consumer(void *p)
     /* Connect to database */
     if (!mysql_real_connect(mysql, server, user, password, database, 0, NULL, 0))
     {
-        fprintf(stderr, "%s\n", mysql_error(vox_mysql));
+        fprintf(stderr, "%s\n", mysql_error(mysql));
         exit(0);
     }
     vox_stmt = mysql_stmt_init(mysql);
@@ -125,7 +125,7 @@ void* consumer(void *p)
 
     if(*c->DEBUG) printf("spec args bound\n");
 
-    prepareTable( spec_mysql, spec_stmt, spec_bind, SPECTRA_TYPE, &spec_args, c );
+    prepareTable( mysql, spec_stmt, spec_bind, SPECTRA_TYPE, &spec_args, c );
     if(*c->DEBUG) printf("spec table preapred\n");
 
 

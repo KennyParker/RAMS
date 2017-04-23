@@ -186,6 +186,9 @@ void* consumer(void *p)
     printf("consumer mysql left...\n");
     /* Close the statement */
     if( vox_stmt != NULL){
+
+        printf("vox stmt not null\n");
+
         if (mysql_stmt_close(vox_stmt))
         {
           fprintf(stderr, " failed while closing the statement\n");

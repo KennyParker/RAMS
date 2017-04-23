@@ -72,7 +72,7 @@ void* spectrometer(void *p)
     printf("spectrometer finished\n");
         while( ! *c->FINISHED ) // wait up
       ;
-    return NULL;
+    return 0;
 }
 
 void auto_correct( double *white_bal, struct control *c )

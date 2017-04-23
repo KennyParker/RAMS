@@ -80,7 +80,7 @@ void* gimbalController(void *p)
     printf("gimbal finished\n");
         while( ! *c->FINISHED ) // wait up
       ;
-    return NULL;
+    return 0;
 }
 
 void turn(struct angle *spin, int time ){

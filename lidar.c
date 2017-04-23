@@ -47,7 +47,7 @@ void* laserRangefinder(void *p)
 
     while( ! *c->FINISHED ) // wait up
       ;
-    return NULL;
+    return 0;
 }
 
 int lidar_init(bool DEBUG) {

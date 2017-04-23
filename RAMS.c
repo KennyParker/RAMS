@@ -28,7 +28,7 @@ int main(int argc, char *argv[])
 {
 
     mysql = mysql_init(NULL);
-    
+
     printf("size S :%d\n", SIZE_S);
     printf("size A :%d\n", SIZE_A);
     printf("size L :%d\n", SIZE_L);
@@ -66,7 +66,12 @@ int main(int argc, char *argv[])
 
     while( ! *control.FINISHED )    // wait for finish
         ;
+    printf("sleepy?\n");
     usleep(3.0e6);
+
+
+    mysql_close(spec_mysql);
+
 
     pthread_join(t[4], NULL);
         printf("join 4\n");

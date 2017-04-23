@@ -84,7 +84,7 @@ void* controller(void *p)
     printf("control finished\n");
         while( ! *c->FINISHED ) // wait up
       ;
-    return NULL;
+    return 0;
 }
 
 

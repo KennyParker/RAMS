@@ -183,7 +183,6 @@ void* consumer(void *p)
     usleep(4000000);
     *c->FINISHED = true;
 
-
     printf("consumer mysql left...\n");
     /* Close the statement */
     if (mysql_stmt_close(vox_stmt))
@@ -192,6 +191,10 @@ void* consumer(void *p)
       fprintf(stderr, " %s\n", mysql_stmt_error(vox_stmt));
       exit(0);
     }
+    mysql_close(vox_mysql);
+
+    printf("no vox problem\n");
+
     /* Close the statement */
     if (mysql_stmt_close(spec_stmt))
     {
@@ -199,8 +202,10 @@ void* consumer(void *p)
       fprintf(stderr, " %s\n", mysql_stmt_error(spec_stmt));
       exit(0);
     }
-    mysql_close(vox_mysql);
     mysql_close(spec_mysql);
+    
+        printf("no spec problem\n");
+
 
     printf("consumer finished\n");
     return NULL;

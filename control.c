@@ -84,7 +84,6 @@ void* controller(void *p)
     printf("control finished\n");
         while( ! *c->FINISHED ) // wait up
       ;
-    printf("consumer finsihed\n");
     usleep(3.0e6);
     printf("waited to return\n");
     return NULL;

@@ -10,6 +10,8 @@
 #include <math.h>
 #include <termios.h>
 #include <errno.h>
+#include <my_global.h>
+#include <mysql.h>
 
 
 #include "SBGC.h"

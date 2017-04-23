@@ -106,6 +106,9 @@ void init_control( struct control *control, int argc, char *argv[] ){
     control->READY = (bool*)malloc(sizeof(bool));
     *control->READY = false;
 
+    control->FINISHED = (bool*)malloc(sizeof(bool));
+    *control->FINISHED = false;
+
     control->CLEAR = (bool*)malloc(sizeof(bool)); // IF DESTROY IS TRUE, ALL DATA IS CLEARED on every run.
     *control->CLEAR = true;
 

@@ -11,6 +11,7 @@ struct control
     bool *OUTPUT;
 
     bool *READY;
+    bool *FINISHED;
     bool *CLEAR; // IF DESTROY IS TRUE, ALL DATA IS CLEARED on every run.
 
     bool *WRITE_VOXEL;

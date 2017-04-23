@@ -178,6 +178,7 @@ void* consumer(void *p)
     
     } while( ! finished );
     printf("consumer left loop\n");
+    *c->FINISHED = true;
 
 
     /* Close the statement */

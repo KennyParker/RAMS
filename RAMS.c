@@ -61,6 +61,9 @@ int main(int argc, char *argv[])
 
     printf("created and not joined\n");
 
+    while( ! *control.FINISHED )    // wait for finish
+        ;
+
     pthread_join(t[4], 0);
         printf("join 4\n");
 

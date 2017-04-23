@@ -90,7 +90,6 @@ void* consumer(void *p)
 
     //MYSQL *spec_mysql = mysql_init(NULL);
 
-
     /* Connect to database */
     /*
     if (!mysql_real_connect(spec_mysql, server, user, password, database, 0, NULL, 0))
@@ -196,7 +195,6 @@ void* consumer(void *p)
             }
     
     } while( ! finished );
-    usleep(1000000);
     *c->FINISHED = true;
 
     if (mysql_stmt_close(vox_stmt))
@@ -215,7 +213,7 @@ void* consumer(void *p)
     }    
     // mysql_close(spec_mysql);
 
-    printf("consumer finished\n");
+    if(*c->DEBUG) printf("consumer finished\n");
     return 0;
 }
 

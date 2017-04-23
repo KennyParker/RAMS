@@ -63,15 +63,9 @@ int main(int argc, char *argv[])
     pthread_create(&t[3], 0, spectrometer, &spectral_control);
     pthread_create(&t[4], 0, consumer, &all);
 
-
     while( ! *control.FINISHED )    // wait for finish
         ;
-    printf("sleepy?\n");
-    usleep(3.0e6);
-
-
     mysql_close(mysql);
-
 
     pthread_join(t[4], NULL);
     pthread_join(t[3], NULL);

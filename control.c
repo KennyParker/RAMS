@@ -81,8 +81,9 @@ void* controller(void *p)
         /*chill*/;
     *c->STOP = true;
     
-    printf("control finished\n");
-        while( ! *c->FINISHED ) // wait up
+    if(*c->DEBUG) printf("control finished\n");
+    
+    while( ! *c->FINISHED ) // wait up
       ;
     return 0;
 }
@@ -128,10 +129,14 @@ int parse_commands( struct control *control, int argc, char *argv[] )
 {
     if( argc > 1 ){
         for( int i=1; i<argc; i++ ){
-            if( argv[i][0] == 'd' )
+            if( argv[i][0] == 'd' ){
                 *control->DEBUG = true;
-            else if( argv[i][0] == 'c' )
+                printf("DEBUG ON \n");
+            }
+            else if( argv[i][0] == 'c' ){
                 *control->CLEAR = true;
+                printf("CLEAR DATABASE ON \n");
+            }
             else return 1;
         }
     }

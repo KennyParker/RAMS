@@ -63,14 +63,13 @@ void* spectrometer(void *p)
         else if( *c->DEBUG ) printf( "spectrometer queue full\n");
 
     }
-    printf("spectrometer left loop\n");
-
 
     seabreeze_close_spectrometer(0, &error);        // zero = only spectrometer
     if (error) perror("spectrometer unclosed");
 
-    printf("spectrometer finished\n");
-        while( ! *c->FINISHED ) // wait up
+    if(*c->DEBUG) printf("spectrometer finished\n");
+
+    while( ! *c->FINISHED ) // wait up
       ;
     return 0;
 }

@@ -45,7 +45,7 @@ void* laserRangefinder(void *p)
             exit(0);
         }
     }
-    printf("lidar finished");
+    if(*c->DEBUG) printf("lidar finished \n");
 
     while( ! *c->FINISHED ) // wait up
       ;

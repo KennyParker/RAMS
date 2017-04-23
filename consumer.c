@@ -228,7 +228,7 @@ void convert(struct laser *point, struct angle *angle1, struct angle *angle2, in
         */
 }
 
-void triInitialize( struct consumelAll *all, struct laser *point, struct angle *angle1, struct angle *angle2, struct spectral *spectrum1, struct spectral *spectrum2, struct control *c)
+void triInitialize( struct consumeAll *all, struct laser *point, struct angle *angle1, struct angle *angle2, struct spectral *spectrum1, struct spectral *spectrum2, struct control *c)
 {
     struct LamportQueue *lidar = all->lidar;
     struct LamportQueue *angles = all->angles;

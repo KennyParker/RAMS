@@ -22,8 +22,13 @@ void* gimbalController(void *p);
 void* spectrometer(void *p);
 void* consumer(void *p);
 
+MYSQL *mysql;
+
 int main(int argc, char *argv[])
 {
+
+    mysql = mysql_init(NULL);
+    
     printf("size S :%d\n", SIZE_S);
     printf("size A :%d\n", SIZE_A);
     printf("size L :%d\n", SIZE_L);

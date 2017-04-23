@@ -15,7 +15,7 @@ void* controller(void *p)
 {
     struct control *c = (struct control*)p;
 
-    MYSQL *mysql = mysql_init(NULL);
+    // MYSQL *mysql = mysql_init(NULL);
     MYSQL_STMT    *stmt;
     MYSQL_BIND    bind[BINDS_SCAN];
     memset(bind, 0, sizeof(bind));

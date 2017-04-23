@@ -92,7 +92,7 @@ void* consumer(void *p)
 
 
     /* Connect to database */
-/*
+    /*
     if (!mysql_real_connect(spec_mysql, server, user, password, database, 0, NULL, 0))
     {
         fprintf(stderr, "%s\n", mysql_error(spec_mysql));
@@ -164,9 +164,12 @@ void* consumer(void *p)
                 printf("spectra popped: %f \n", spectrum2.spectrum[0]);
 
             array2string(spectrum1.spectrum, encode);
-            
+            exposure = spectrum1.exposure;
+            s_time = spectrum1.time;
+
             execute(spec_stmt);
             spectra_id = mysql_insert_id(mysql);
+
 
             if(c->DEBUG)
                 printf("inserted spectra %d\n", spectra_id);

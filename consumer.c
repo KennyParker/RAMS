@@ -59,17 +59,17 @@ void* consumer(void *p)
     int id = *c->scan_id;
     if(*c->DEBUG) printf("binding voxel to scan_id %d \n", id );
 
-    vox_args.id = &id;
-
     int spectra_id = 1;
-    vox_args.spec_id = &spectra_id;
     int v_time = 1;
-    vox_args.v_time = &v_time;
     int x = 1;
-    vox_args.x = &x;
     int y = 1;
-    vox_args.y = &y;
     int z = 1;
+
+    vox_args.id = &id;
+    vox_args.spec_id = &spectra_id;
+    vox_args.v_time = &v_time;
+    vox_args.x = &x;
+    vox_args.y = &y;
     vox_args.z = &z;
 
     if(*c->DEBUG) printf("vox args bound\n");
@@ -185,28 +185,30 @@ void* consumer(void *p)
 
     printf("consumer mysql left...\n");
     /* Close the statement */
-    if (mysql_stmt_close(vox_stmt))
-    {
-      fprintf(stderr, " failed while closing the statement\n");
-      fprintf(stderr, " %s\n", mysql_stmt_error(vox_stmt));
-      exit(0);
+    if( vox_stmt != NULL){
+        if (mysql_stmt_close(vox_stmt))
+        {
+          fprintf(stderr, " failed while closing the statement\n");
+          fprintf(stderr, " %s\n", mysql_stmt_error(vox_stmt));
+          exit(0);
+        }
+        printf("stmt closed\n");
     }
-    printf("stmt closed\n");
-    
     mysql_close(vox_mysql);
 
     printf("no vox problem\n");
 
     /* Close the statement */
-    if (mysql_stmt_close(spec_stmt))
-    {
-      fprintf(stderr, " failed while closing the statement\n");
-      fprintf(stderr, " %s\n", mysql_stmt_error(spec_stmt));
-      exit(0);
+    if( spec_stmt != NULL){
+        if (mysql_stmt_close(spec_stmt))
+        {
+          fprintf(stderr, " failed while closing the statement\n");
+          fprintf(stderr, " %s\n", mysql_stmt_error(spec_stmt));
+          exit(0);
+        }    
     }
     mysql_close(spec_mysql);
-
-        printf("no spec problem\n");
+    printf("no spec problem\n");
 
 
     printf("consumer finished\n");

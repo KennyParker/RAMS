@@ -19,7 +19,7 @@ struct attitude{
 };
 
 
-void turn(struct angle *spin);
+void turn(struct angle *spin, int time);
 int openUart();
 int set_interface_attribs(int fd, int speed);
 void sendCommand(int uart, uint8_t cmd, void *data, uint16_t size);

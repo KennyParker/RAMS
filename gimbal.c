@@ -96,7 +96,7 @@ void turn(struct angle *spin, int time ){
     spin->pitch = 40 * sinf( 2 * M_PI * pitchState/pitchPeriod );
     spin->roll = 10 * sinf( 2 * M_PI * rollState/rollPeriod );
 
-    printf("y%f\t p%f\t r%f \n",, spin->yaw, spin->pitch, spin->roll);
+    printf("y%f\t p%f\t r%f \n", spin->yaw, spin->pitch, spin->roll);
 } 
 
 int openUart()

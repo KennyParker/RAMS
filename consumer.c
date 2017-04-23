@@ -177,7 +177,8 @@ void* consumer(void *p)
             }
     
     } while( ! finished );
-    
+    printf("consumer left loop\n");
+
 
     /* Close the statement */
     if (mysql_stmt_close(vox_stmt))

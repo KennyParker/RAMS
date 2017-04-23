@@ -7,6 +7,8 @@
 #include <stdbool.h>
 #include <stdatomic.h>
 #include <unistd.h>
+#include <my_global.h>
+#include <mysql.h>
 
 #include "control.h"
 #include "spectrometer.h"

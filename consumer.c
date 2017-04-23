@@ -124,6 +124,8 @@ void* consumer(void *p)
 
         if(*c->DEBUG) printf("within consume loop... \n");
 
+        if(*c->STOP) printf("finishing queues \n");
+
         if( point.time > angle2.time ){
             angle1 = angle2;
 

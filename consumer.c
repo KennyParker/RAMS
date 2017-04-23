@@ -23,6 +23,8 @@ void* consumer(void *p)
     struct LamportQueue *spectral = all->spectral;
     struct control *c = all->control;
 
+    bool finished = false;
+
     struct laser point;
     struct angle angle1, angle2;
     struct spectral spectrum1, spectrum2;
@@ -118,7 +120,7 @@ void* consumer(void *p)
 
     //float normalized, yaw, pitch, roll, azimuth, inclination;
 
-    while( ! *c->STOP ){
+    do{
 
         if(*c->DEBUG) printf("within consume loop... \n");
 
@@ -126,13 +128,21 @@ void* consumer(void *p)
             angle1 = angle2;
 
             while(! LamportQueue_pop(angles, &angle2)) // wait for next angle
-                ;
+                if( *c->STOP ){
+                    finished = true;
+                    break;
+                }
+    
         }
         if( point.time > mid_gap ){
             spectrum1 = spectrum2;
 
             while(! LamportQueue_pop(spectral, &spectrum2)) // wait for next spectra
-                ;
+                if( *c->STOP ){
+                    finished = true ;
+                    break;
+                }
+
             mid_gap = (spectrum1.time + spectrum1.exposure/1.0e3 + spectrum2.time) / 2.0;
             
             if( *c->DEBUG)
@@ -159,11 +169,15 @@ void* consumer(void *p)
             if( *c->OUTPUT )
                 printf("dist written: %d \n", point.distance );
         }
-        if(*c->DEBUG) printf("ran through...\n");
 
         while(! LamportQueue_pop(lidar, &point)) // wait for next point
-            ;
-    }
+            if( *c->STOP ){
+                    finished = true ;
+                    break;
+            }
+    
+    } while( ! finished );
+    
     
     /* Close the statement */
     if (mysql_stmt_close(vox_stmt))

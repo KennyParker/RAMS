@@ -167,13 +167,13 @@ void sendCommand(int uart, uint8_t cmd, void *data, uint16_t size)
             buff[j++] = ((uint8_t*)data)[i];
         }
         buff[j++] = checksum % 256;
-
+/*
         printf("\n ——— sending command:\n");
         for(int k=0; k<j; k++ ){
             printf( "%X ", buff[k] );
         }
         printf("\n ——— \n");
-        
+*/      
         write(uart,buff,j);
         
     }

@@ -179,45 +179,24 @@ void* consumer(void *p)
             }
     
     } while( ! finished );
-    printf("consumer left loop\n");
-    usleep(4000000);
+    usleep(1000000);
     *c->FINISHED = true;
 
-    printf("consumer mysql left...\n");
-    /* Close the statement */
-    
-    
-    if( vox_stmt != NULL){
-
-        printf("vox stmt not null\n");
-
-        if (mysql_stmt_close(vox_stmt))
-        {
-          fprintf(stderr, " failed while closing the statement\n");
-          fprintf(stderr, " %s\n", mysql_stmt_error(vox_stmt));
-          exit(0);
-        }
-        printf("stmt closed\n");
+    if (mysql_stmt_close(vox_stmt))
+    {
+      fprintf(stderr, " failed while closing the statement\n");
+      fprintf(stderr, " %s\n", mysql_stmt_error(vox_stmt));
+      exit(0);
     }
-    
     // mysql_close(vox_mysql);
 
-    printf("no vox problem\n");
-
-    /* Close the statement */
-    
-    if( spec_stmt != NULL){
-        if (mysql_stmt_close(spec_stmt))
-        {
-          fprintf(stderr, " failed while closing the statement\n");
-          fprintf(stderr, " %s\n", mysql_stmt_error(spec_stmt));
-          exit(0);
-        }    
-    }
-    
+    if (mysql_stmt_close(spec_stmt))
+    {
+      fprintf(stderr, " failed while closing the statement\n");
+      fprintf(stderr, " %s\n", mysql_stmt_error(spec_stmt));
+      exit(0);
+    }    
     // mysql_close(spec_mysql);
-    printf("no spec problem\n");
-
 
     printf("consumer finished\n");
     return NULL;

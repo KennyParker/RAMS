@@ -35,36 +35,46 @@ void* consumer(void *p)
     int mid_gap = (spectrum1.time + spectrum1.exposure/1.0e3 + spectrum2.time) / 2.0;
             // voxels inbetween exposures choose sides based on the mid gap
 
-    MYSQL *vox_mysql = mysql_init(NULL);
+    MYSQL *mysql = mysql_init(NULL);
+
     MYSQL_STMT    *vox_stmt;
     MYSQL_BIND    vox_bind[BINDS_VOXEL];
     memset(vox_bind, 0, sizeof(vox_bind));
 
+    MYSQL_STMT    *spec_stmt;
+    MYSQL_BIND    spec_bind[BINDS_SPECTRA];
+    memset(spec_bind, 0, sizeof(spec_bind));
+
     /* Connect to database */
-    if (!mysql_real_connect(vox_mysql, server, user, password, database, 0, NULL, 0))
+    if (!mysql_real_connect(mysql, server, user, password, database, 0, NULL, 0))
     {
         fprintf(stderr, "%s\n", mysql_error(vox_mysql));
         exit(0);
     }
-    vox_stmt = mysql_stmt_init(vox_mysql);
+    vox_stmt = mysql_stmt_init(mysql);
     if (!vox_stmt)
     {
         fprintf(stderr, " mysql_stmt_init(), out of memory\n");
         exit(0);
     }
+    spec_stmt = mysql_stmt_init(mysql);
+    if (!spec_stmt)
+    {
+        fprintf(stderr, " mysql_stmt_init(), out of memory\n");
+    }
 
-    // MOCK VOXEL 
-    struct arg_struct vox_args;
-    
+    // both belong to SCAN
     int id = *c->scan_id;
     if(*c->DEBUG) printf("binding voxel to scan_id %d \n", id );
 
+    // VOXEL     
     int spectra_id = 1;
     int v_time = 1;
     int x = 1;
     int y = 1;
     int z = 1;
 
+    struct arg_struct vox_args;
     vox_args.id = &id;
     vox_args.spec_id = &spectra_id;
     vox_args.v_time = &v_time;
@@ -74,22 +84,21 @@ void* consumer(void *p)
 
     if(*c->DEBUG) printf("vox args bound\n");
     
-    prepareTable( vox_mysql, vox_stmt, vox_bind, VOXEL_TYPE, &vox_args, c );
+    prepareTable( mysql, vox_stmt, vox_bind, VOXEL_TYPE, &vox_args, c );
     if(*c->DEBUG) printf("vox table preapred\n");
 
 
-    MYSQL *spec_mysql = mysql_init(NULL);
-    MYSQL_STMT    *spec_stmt;
-    MYSQL_BIND    spec_bind[BINDS_SPECTRA];
-    memset(spec_bind, 0, sizeof(spec_bind));
+    //MYSQL *spec_mysql = mysql_init(NULL);
+
 
     /* Connect to database */
+/*
     if (!mysql_real_connect(spec_mysql, server, user, password, database, 0, NULL, 0))
     {
         fprintf(stderr, "%s\n", mysql_error(spec_mysql));
         exit(0);
     }
-    /*
+    
     spec_stmt = mysql_stmt_init(spec_mysql);
     if (!spec_stmt)
     {
@@ -97,35 +106,32 @@ void* consumer(void *p)
         exit(0);
     }
     */
-    spec_stmt = mysql_stmt_init(vox_mysql);
-    if (!spec_stmt)
-    {
-        fprintf(stderr, " mysql_stmt_init(), out of memory\n");
-    }
 
     // MOCK SPECTRA
-    struct arg_struct spec_args;
-    spec_args.id = &id;
-    spec_args.s_time = &spectrum1.time;
-    spec_args.exposure = &spectrum1.exposure;
-
+    int s_time = 1;
+    int exposure = 1;
     int len = encode_length;
-    spec_args.encode_len = &len;
-    
     unsigned char encode[encode_length];
     array2string(spectrum1.spectrum, encode);
+
+
+    struct arg_struct spec_args;
+    spec_args.id = &id;
+    spec_args.s_time = &s_time;
+    spec_args.exposure = &exposure;
     spec_args.encode = encode;
+    spec_args.encode_len = &len;    
+
 
     if(*c->DEBUG) printf("spec args bound\n");
+
     prepareTable( spec_mysql, spec_stmt, spec_bind, SPECTRA_TYPE, &spec_args, c );
     if(*c->DEBUG) printf("spec table preapred\n");
+
 
     execute(spec_stmt);
     spectra_id = mysql_insert_id(spec_mysql);
     if(*c->DEBUG) printf("inserted spectra %d\n", spectra_id);
-
-
-    //float normalized, yaw, pitch, roll, azimuth, inclination;
 
     do{
 

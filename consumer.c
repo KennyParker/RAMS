@@ -134,9 +134,7 @@ void* consumer(void *p)
 
     do{
 
-        if(*c->DEBUG) printf("within consume loop... \n");
-
-        if(*c->STOP) printf("finishing queues \n");
+        if(*c->DEBUG) if(*c->STOP) printf("finishing queues \n");
 
         if( point.time > angle2.time ){
             angle1 = angle2;
@@ -170,7 +168,7 @@ void* consumer(void *p)
             spectra_id = mysql_insert_id(mysql);
 
 
-            if(c->DEBUG)
+            if( *c->DEBUG)
                 printf("inserted spectra %d\n", spectra_id);
         }
 

@@ -36,7 +36,7 @@ void* controller(void *p)
 
     if(*c->CLEAR){
         destroyAll(mysql);
-        printf("tables reinitialized\n");
+        printf("tables cleared!\n");
     }
 
     double white_bal[PIXELS];

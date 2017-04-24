@@ -223,7 +223,7 @@ void destroyAll( MYSQL *mysql )
     if( ch != 'K' )
         exit(0);
 
-    printf("dropping...\n");
+    printf("...dropping...");
     // while ((ch = getchar()) != '\n' && ch != EOF);
 
     if (mysql_query(mysql, DROP_SCANS))

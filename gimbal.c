@@ -87,7 +87,7 @@ void turn(struct angle *spin, int step ){
 
     const int second = 50; // commands per second
     //const int yawPeriod = 11 * second;
-    const int pitchPeriod = 15 * second;
+    const int pitchPeriod = 5 * second;
     //const int rollPeriod = 0.2 * second;
 
     //int yawState = step % yawPeriod;

@@ -142,6 +142,10 @@ int parse_commands( struct control *control, int argc, char *argv[] )
                 *control->CLEAR = true;
                 printf("CLEAR DATABASE ON \n");
             }
+            else if( argv[i][0] == 'b' ){
+                *control->WRITE_SPECTRA = false;
+                printf("SPECTROMETER OFF \n");
+            }
             else return 1;
         }
     }

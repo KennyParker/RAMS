@@ -102,7 +102,7 @@ void turn(struct angle *spin, int step ){
     spin->yaw = 0;
     spin->roll = 0;
 
-    printf("y%f\t p%f\t r%f \n", spin->yaw, spin->pitch, spin->roll);
+    printf("y%f\t p%f\t r%f \r", spin->yaw, spin->pitch, spin->roll);
 } 
 
 int openUart()

@@ -218,8 +218,8 @@ void destroyAll( MYSQL *mysql )
     printf("If you need to clear all data and \n"
            "reinitialize the tables, enter a K...\n"
            "Otherwise, rethink... \n");
-    //char ch = getchar();
-    char ch = 'K';
+    char ch = getchar();
+    //char ch = 'K';
     if( ch != 'K' )
         exit(0);
 

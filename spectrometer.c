@@ -21,42 +21,43 @@ void* spectrometer(void *p)
     struct LamportQueue *queue = spectrometer_control->queue;
     struct control *c = spectrometer_control->control;
     
-    if( ! *c->WRITE_SPECTRA ) return 0;
-
     struct spectral to_push;
 
     int error = 0;
-    double spectrum[PIXELS];
+    double spectrum[PIXELS] = {0};
     
     struct timespec now;
 
-    open_spectrometer();
+    if( *c->WRITE_SPECTRA ) open_spectrometer();
 
     while( ! *c->STOP ){
 
+
         usleep(S_TIME);
 
-        seabreeze_set_integration_time_microsec(0, &error, *c->exposure);
-        if (error) perror("exposure not set");
-        to_push.exposure = *c->exposure;
+        if( *c->WRITE_SPECTRA ){
 
-        clock_gettime(CLOCK_REALTIME, &now);
-        to_push.time = (now.tv_sec - *c->start_time) * 1000 + (now.tv_nsec) / 1.0e6 ;
+            seabreeze_set_integration_time_microsec(0, &error, *c->exposure);
+            if (error) perror("exposure not set");
+            to_push.exposure = *c->exposure;
 
-        seabreeze_get_formatted_spectrum(0, &error, spectrum, sizeof(spectrum));
-        if (error) perror("no spectrum");
+            clock_gettime(CLOCK_REALTIME, &now);
+            to_push.time = (now.tv_sec - *c->start_time) * 1000 + (now.tv_nsec) / 1.0e6 ;
 
-		if( *c->OUTPUT ){
+            seabreeze_get_formatted_spectrum(0, &error, spectrum, sizeof(spectrum));
+            if (error) perror("no spectrum");
 
-            for(int i=0; i<PIXELS; i+=100 ){
-                printf("%05f ", spectrum[i] );
+            if( *c->OUTPUT ){
+
+                for(int i=0; i<PIXELS; i+=100 ){
+                    printf("%05f ", spectrum[i] );
+                }
+                printf("\n");
             }
-            printf("\n");
-		}
+        }
+        memcpy(to_push.spectrum, spectrum, sizeof(spectrum));
 
-    	memcpy(to_push.spectrum, spectrum, sizeof(spectrum));
-
-        printf("pushing spectra \n");
+        if( *c->DEBUG ) printf("pushing spectra \n");
 
         if(LamportQueue_push(queue, (void*)&to_push) ) // all's well
             ;
@@ -64,9 +65,12 @@ void* spectrometer(void *p)
 
     }
 
-    seabreeze_close_spectrometer(0, &error);        // zero = only spectrometer
-    if (error) perror("spectrometer unclosed");
+    if( *c->WRITE_SPECTRA ){
+         seabreeze_close_spectrometer(0, &error);        // zero = only spectrometer
+        if (error) perror("spectrometer unclosed");
 
+    }
+   
     if(*c->DEBUG) printf("spectrometer finished\n");
 
     while( ! *c->FINISHED ) // wait up

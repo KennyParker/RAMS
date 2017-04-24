@@ -86,9 +86,9 @@ void* gimbalController(void *p)
 void turn(struct angle *spin, int step ){
 
     const int second = 50; // commands per second
-    const int yawPeriod = 11 * second;
-    const int pitchPeriod = 3 * second;
-    const int rollPeriod = 0.2 * second;
+    //const int yawPeriod = 11 * second;
+    const int pitchPeriod = 5 * second;
+    //const int rollPeriod = 0.2 * second;
 
     //int yawState = step % yawPeriod;
     int pitchState = step % pitchPeriod;
@@ -96,7 +96,7 @@ void turn(struct angle *spin, int step ){
 
 
     // spin->yaw = 90 * sinf( 2 * M_PI * yawState/yawPeriod );
-    spin->pitch = 30 * sinf( 2 * M_PI * pitchState/pitchPeriod );
+    spin->pitch = 40 * sinf( 2 * M_PI * pitchState/pitchPeriod );
     // spin->roll = 10 * sinf( 2 * M_PI * rollState/rollPeriod );
 
     spin->yaw = 0;

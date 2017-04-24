@@ -88,7 +88,7 @@ void* gimbalController(void *p)
 
 void turn(struct angle *spin, int time ){
 
-    int period = 1000;
+    int period = 100;
     int yawPeriod = period * 17;
     int pitchPeriod = period * 39;
     int rollPeriod = period * 5;

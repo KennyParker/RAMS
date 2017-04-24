@@ -38,7 +38,7 @@ void* laserRangefinder(void *p)
         rangefinder.time = (now.tv_sec - *c->start_time) * 1000 + (now.tv_nsec) / 1.0e6 ;
         rangefinder.distance = lidar_read(init);
         
-        printf("laser: %d %c", i%10?'\n':'\r');
+        printf("laser: %d %c", i%10==0?'\n':'\r');
 
         if(LamportQueue_push(queue, (void*)&rangefinder) ) // all's well
             i++;

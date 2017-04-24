@@ -146,6 +146,11 @@ int parse_commands( struct control *control, int argc, char *argv[] )
                 *control->WRITE_SPECTRA = false;
                 printf("SPECTROMETER OFF \n");
             }
+            else if( argv[i][0] == 's' ){
+                *control->WRITE_VOXEL = false;
+                printf("LASER OFF \n");
+            }
+
             else return 1;
         }
     }

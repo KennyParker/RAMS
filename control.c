@@ -151,7 +151,14 @@ int parse_commands( struct control *control, int argc, char *argv[] )
                 printf("LASER OFF \n");
             }
 
-            else return 1;
+            else{
+                printf("Usage:\n"
+                    "d = DEBUG\n"
+                    "c = CLEAR DATABASE\n"
+                    "b = blind (spectrometer)\n"
+                    "s = safe (laser off)\n" );
+                return 1;
+            }
         }
     }
     return 0;

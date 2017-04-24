@@ -193,6 +193,7 @@ void* consumer(void *p)
             }
     
     } while( ! finished );
+    usleep(2.0e6);
     *c->FINISHED = true;
 
     if (mysql_stmt_close(vox_stmt))

@@ -61,6 +61,8 @@ void* gimbalController(void *p)
 	    
         if(step>65535) step = 0; // prevents iter overflow
         turn( &aim, step++ );
+        if( *c->DEBUG ) printf("y%f\t p%f\t r%f %c", aim.yaw, aim.pitch, aim.>roll, step%10==0?'\n':'\r');
+
 
         cmd_control_data.angleROLL = DEGR_OF aim.roll ;
         cmd_control_data.anglePITCH = DEGR_OF aim.pitch ;
@@ -109,7 +111,6 @@ void turn(struct angle *spin, int step ){
     // spin->yaw = 0;
     //spin->roll = 0;
 
-    printf("y%f\t p%f\t r%f %c", spin->yaw, spin->pitch, spin->roll, step%10==0?'\n':'\r');
 }
 
 int openUart()

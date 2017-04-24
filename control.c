@@ -42,7 +42,7 @@ void* controller(void *p)
 
     // WHITE BALANCE 
     double white_bal[PIXELS];
-    if( *c->WRITE_SPECTRA ) auto_correct(white_bal, c);
+    if( *c->RUN_SPECTROMETER ) auto_correct(white_bal, c);
 
 
     struct arg_struct args;
@@ -118,11 +118,11 @@ void init_control( struct control *control, int argc, char *argv[] ){
     control->CLEAR = (bool*)malloc(sizeof(bool)); // IF DESTROY IS TRUE, ALL DATA IS CLEARED on every run.
     *control->CLEAR = false;
 
-    control->WRITE_VOXEL = (bool*)malloc(sizeof(bool));
-    *control->WRITE_VOXEL = true;
+    control->RUN_LASER = (bool*)malloc(sizeof(bool));
+    *control->RUN_LASER = true;
 
-    control->WRITE_SPECTRA = (bool*)malloc(sizeof(bool));
-    *control->WRITE_SPECTRA = true;
+    control->RUN_SPECTROMETER = (bool*)malloc(sizeof(bool));
+    *control->RUN_SPECTROMETER = true;
 
     if( parse_commands( control, argc, argv ) )
         printf("error in parsing commands\n");
@@ -131,7 +131,7 @@ void init_control( struct control *control, int argc, char *argv[] ){
 int parse_commands( struct control *control, int argc, char *argv[] )
 {
     if( argc > 1 ){
-        printf("Based on command lin arguments...\n");
+        printf("Based on command lin arguments...\n\n");
 
         for( int i=1; i<argc; i++ ){
             if( argv[i][0] == 'd' ){
@@ -143,11 +143,11 @@ int parse_commands( struct control *control, int argc, char *argv[] )
                 printf("CLEAR DATABASE ON \n");
             }
             else if( argv[i][0] == 'b' ){
-                *control->WRITE_SPECTRA = false;
+                *control->RUN_SPECTROMETER = false;
                 printf("SPECTROMETER OFF \n");
             }
             else if( argv[i][0] == 's' ){
-                *control->WRITE_VOXEL = false;
+                *control->RUN_LASER = false;
                 printf("LASER OFF \n");
             }
 

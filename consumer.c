@@ -172,19 +172,16 @@ void* consumer(void *p)
                 printf("inserted spectra %d\n", spectra_id);
         }
 
-	    if( *c->WRITE_VOXEL ){
+        if(*c->DEBUG) printf("entered vox write stage \n");
 
-            if(*c->DEBUG) printf("entered vox write stage \n");
+        convert( &point, &angle1, &angle2, &x, &y, &z );
+        if(*c->DEBUG) printf("passed convert\n");
+        v_time = point.time;
 
-            convert( &point, &angle1, &angle2, &x, &y, &z );
-            if(*c->DEBUG) printf("passed convert\n");
-            v_time = point.time;
+        execute(vox_stmt);
 
-            execute(vox_stmt);
-
-            if( *c->OUTPUT )
-                printf("dist written: %d \n", point.distance );
-        }
+        if( *c->OUTPUT )
+            printf("dist written: %d \n", point.distance );
 
         while(! LamportQueue_pop(lidar, &point)) // wait for next point
             if( *c->STOP ){

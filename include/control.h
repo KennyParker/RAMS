@@ -15,8 +15,8 @@ struct control
     bool *FINISHED;
     bool *CLEAR; // IF DESTROY IS TRUE, ALL DATA IS CLEARED on every run.
 
-    bool *WRITE_VOXEL;
-    bool *WRITE_SPECTRA;
+    bool *RUN_LASER;
+    bool *RUN_SPECTROMETER;
 
 };
 

@@ -37,7 +37,7 @@ void* laserRangefinder(void *p)
         clock_gettime(CLOCK_REALTIME, &now);
         rangefinder.time = (now.tv_sec - *c->start_time) * 1000 + (now.tv_nsec) / 1.0e6 ;
         
-        if(*c->WRITE_VOXEL) rangefinder.distance = lidar_read(init);
+        if(*c->RUN_LASER) rangefinder.distance = lidar_read(init);
         else rangefinder.distance = 42;
 
         if( rangefinder.distance > 6000 || rangefinder.distance < 0 )

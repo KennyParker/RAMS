@@ -35,7 +35,7 @@ void* spectrometer(void *p)
 
         usleep(S_TIME);
 
-        if( *c->WRITE_SPECTRA ){
+        if( *c->RUN_SPECTROMETER ){
 
             seabreeze_set_integration_time_microsec(0, &error, *c->exposure);
             if (error) perror("exposure not set");

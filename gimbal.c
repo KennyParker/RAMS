@@ -33,8 +33,7 @@ void* gimbalController(void *p)
     struct angle aim;
 
     int i = 1;
-    int scan_start;
-    struct timespec now, scan;
+    struct timespec now;
     int step = 0;
 
     //struct attitude aim = {0};
@@ -91,9 +90,9 @@ void turn(struct angle *spin, int step ){
     const int pitchPeriod = 3 * second;
     const int rollPeriod = 0.2 * second;
 
-    int yawState = step % yawPeriod;
+    //int yawState = step % yawPeriod;
     int pitchState = step % pitchPeriod;
-    int rollState = step % rollPeriod;
+    //int rollState = step % rollPeriod;
 
 
     // spin->yaw = 90 * sinf( 2 * M_PI * yawState/yawPeriod );

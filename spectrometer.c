@@ -28,7 +28,7 @@ void* spectrometer(void *p)
     
     struct timespec now;
 
-    if( *c->WRITE_SPECTRA ) open_spectrometer();
+    if( *c->RUN_SPECTROMETER ) open_spectrometer();
 
     while( ! *c->STOP ){
 
@@ -70,7 +70,7 @@ void* spectrometer(void *p)
 
     }
 
-    if( *c->WRITE_SPECTRA ){
+    if( *c->RUN_SPECTROMETER ){
          seabreeze_close_spectrometer(0, &error);        // zero = only spectrometer
         if (error) perror("spectrometer unclosed");
 

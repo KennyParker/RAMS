@@ -32,9 +32,9 @@ int main(int argc, char *argv[])
     struct control control;
     init_control( &control, argc, argv );
 
-    printf("controls set, EXP = %d \n", control.exposure);
-    printf("controls set, DEBUG = %s \n", control.DEBUG?"on":"off");
-    if(control.DEBUG){
+    printf("controls set, EXP = %d \n", *control.exposure);
+    printf("controls set, DEBUG = %s \n", *control.DEBUG?"on":"off");
+    if( *control.DEBUG){
         printf("size S :%d\n", SIZE_S);
         printf("size A :%d\n", SIZE_A);
         printf("size L :%d\n", SIZE_L);

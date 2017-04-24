@@ -63,7 +63,7 @@ void* gimbalController(void *p)
         turn( &aim, step++ );
         if( *c->DEBUG ) printf("y%f\t p%f\t r%f %c", aim.yaw, aim.pitch, aim.roll, step%10==0?'\n':'\r');
 
-        printf("y%f\t p%f\t r%f \n", aim.yaw, aim.pitch, aim.roll);
+        printf("y%f\t p%f\t r%f \r", aim.yaw, aim.pitch, aim.roll);
 
         cmd_control_data.angleROLL = DEGR_OF aim.roll ;
         cmd_control_data.anglePITCH = DEGR_OF aim.pitch ;
@@ -107,10 +107,10 @@ void turn(struct angle *spin, int step ){
 
     spin->yaw = 90 * sinf( 2 * M_PI * yawState/yawPeriod );
     spin->pitch = 45 * sinf( 2 * M_PI * pitchState/pitchPeriod );
-    spin->roll = 10 * sinf( 2 * M_PI * rollState/rollPeriod );
+    // spin->roll = 10 * sinf( 2 * M_PI * rollState/rollPeriod );
 
     // spin->yaw = 0;
-    //spin->roll = 0;
+    spin->roll = 0;
 
 }
 

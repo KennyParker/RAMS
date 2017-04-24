@@ -74,6 +74,13 @@ void* gimbalController(void *p)
             i++;
         else if( *c->DEBUG ) printf( "angle queue full\n");
     }
+
+    usleep( A_TIME );
+    cmd_control_data.angleROLL = 0;
+    cmd_control_data.anglePITCH = 0 ;
+    cmd_control_data.angleYAW = 0;
+    sendCommand(basecamUart, SBGC_CMD_CONTROL, &cmd_control_data, sizeof(cmd_control_data));
+    usleep( A_TIME );
     sendCommand(basecamUart, SBGC_CMD_MOTORS_OFF, 0, 0);
 
     if(*c->DEBUG) printf("gimbal finished\n");
@@ -102,7 +109,7 @@ void turn(struct angle *spin, int step ){
     //spin->roll = 0;
 
     printf("y%f\t p%f\t r%f \r", spin->yaw, spin->pitch, spin->roll);
-} 
+}
 
 int openUart()
 {

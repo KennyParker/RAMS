@@ -45,8 +45,9 @@ void* gimbalController(void *p)
 
     SBGC_cmd_control_data cmd_control_data = {0};
     cmd_control_data.mode = SBGC_CONTROL_MODE_ANGLE;
-    cmd_control_data.speedROLL = cmd_control_data.speedPITCH = cmd_control_data.speedYAW = 30 * SBGC_SPEED_SCALE;
-    cmd_control_data.speedPITCH = 90 * SBGC_SPEED_SCALE;
+    
+    cmd_control_data.speedROLL = cmd_control_data.speedPITCH = cmd_control_data.speedYAW = 90 * SBGC_SPEED_SCALE;
+    // cmd_control_data.speedPITCH = 90 * SBGC_SPEED_SCALE;
 
     aim.yaw = 0;
     aim.pitch = 0;
@@ -77,7 +78,7 @@ void* gimbalController(void *p)
 
     usleep( A_TIME );
     cmd_control_data.angleROLL = 0;
-    cmd_control_data.anglePITCH = 0 ;
+    cmd_control_data.anglePITCH = 0;
     cmd_control_data.angleYAW = 0;
     sendCommand(basecamUart, SBGC_CMD_CONTROL, &cmd_control_data, sizeof(cmd_control_data));
     usleep( A_TIME );
@@ -108,7 +109,7 @@ void turn(struct angle *spin, int step ){
     // spin->yaw = 0;
     //spin->roll = 0;
 
-    printf("y%f\t p%f\t r%f \r", spin->yaw, spin->pitch, spin->roll);
+    printf("y%f\t p%f\t r%f %c", spin->yaw, spin->pitch, spin->roll, step%10==0?'\n':'\r');
 }
 
 int openUart()

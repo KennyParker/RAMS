@@ -55,6 +55,8 @@ void* spectrometer(void *p)
                 printf("\n");
             }
         }
+        else usleep( *c->exposure );
+
         memcpy(to_push.spectrum, spectrum, sizeof(spectrum));
 
         if( *c->DEBUG ) printf("pushing spectra \n");

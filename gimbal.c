@@ -65,9 +65,9 @@ void* gimbalController(void *p)
 
         printf("y%f\t p%f\t r%f \r", aim.yaw, aim.pitch, aim.roll);
 
-        cmd_control_data.angleROLL = aim.roll ;
-        cmd_control_data.anglePITCH = aim.pitch ;
-        cmd_control_data.angleYAW = aim.yaw ;
+        cmd_control_data.angleROLL = SBGC_DEGREE_TO_ANGLE(aim.roll) ;
+        cmd_control_data.anglePITCH = SBGC_DEGREE_TO_ANGLE(aim.pitch) ;
+        cmd_control_data.angleYAW = SBGC_DEGREE_TO_ANGLE(aim.yaw) ;
         
         sendCommand(basecamUart, SBGC_CMD_CONTROL, &cmd_control_data, sizeof(cmd_control_data));
         

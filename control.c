@@ -128,6 +128,8 @@ void init_control( struct control *control, int argc, char *argv[] ){
 int parse_commands( struct control *control, int argc, char *argv[] )
 {
     if( argc > 1 ){
+        printf("Based on command lin arguments...\n");
+
         for( int i=1; i<argc; i++ ){
             if( argv[i][0] == 'd' ){
                 *control->DEBUG = true;

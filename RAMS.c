@@ -32,7 +32,7 @@ int main(int argc, char *argv[])
     struct control control;
     init_control( &control, argc, argv );
 
-    printf("REMOTE AERIAL MAPPING SPECTROMETER\n\n DEBUG is %s \n", *control.DEBUG?"on":"off");
+    printf("REMOTE AERIAL MAPPING SPECTROMETER\n\n(DEBUG is %s)\n\n", *control.DEBUG?"on":"off");
     
     if( *control.DEBUG){
         printf("exposure = %d \n", *control.exposure);
@@ -63,7 +63,7 @@ int main(int argc, char *argv[])
 
     pthread_create(&t[1], 0, laserRangefinder, &lidar_control);
     pthread_create(&t[2], 0, gimbalController, &angles_control);
-    // pthread_create(&t[3], 0, spectrometer, &spectral_control);
+    pthread_create(&t[3], 0, spectrometer, &spectral_control);
     pthread_create(&t[4], 0, consumer, &all);
 
     while( ! *control.FINISHED )    // wait for finish

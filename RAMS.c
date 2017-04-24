@@ -61,7 +61,7 @@ int main(int argc, char *argv[])
 
     pthread_create(&t[1], 0, laserRangefinder, &lidar_control);
     pthread_create(&t[2], 0, gimbalController, &angles_control);
-    pthread_create(&t[3], 0, spectrometer, &spectral_control);
+    // pthread_create(&t[3], 0, spectrometer, &spectral_control);
     pthread_create(&t[4], 0, consumer, &all);
 
     while( ! *control.FINISHED )    // wait for finish

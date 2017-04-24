@@ -55,8 +55,11 @@ void* spectrometer(void *p)
                 printf("\n");
             }
         }
-        else usleep( *c->exposure );
-
+        else{
+            clock_gettime(CLOCK_REALTIME, &now);
+            to_push.time = (now.tv_sec - *c->start_time) * 1000 + (now.tv_nsec) / 1.0e6 ;
+            usleep( *c->exposure );
+        }
         memcpy(to_push.spectrum, spectrum, sizeof(spectrum));
 
         if( *c->DEBUG ) printf("pushing spectra \n");

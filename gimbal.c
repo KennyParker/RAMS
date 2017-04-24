@@ -46,7 +46,7 @@ void* gimbalController(void *p)
     SBGC_cmd_control_data cmd_control_data = {0};
     cmd_control_data.mode = SBGC_CONTROL_MODE_ANGLE;
     cmd_control_data.speedROLL = cmd_control_data.speedPITCH = cmd_control_data.speedYAW = 30 * SBGC_SPEED_SCALE;
-
+    cmd_control_data.speedPITCH = 50 * SBGC_SPEED_SCALE;
 
     aim.yaw = 0;
     aim.pitch = 0;

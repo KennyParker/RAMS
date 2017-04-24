@@ -29,13 +29,14 @@ int main(int argc, char *argv[])
 
     mysql = mysql_init(NULL);
 
-    printf("size S :%d\n", SIZE_S);
-    printf("size A :%d\n", SIZE_A);
-    printf("size L :%d\n", SIZE_L);
-
     struct control control;
     init_control( &control, argc, argv );
 
+    if(control.DEBUG){
+        printf("size S :%d\n", SIZE_S);
+        printf("size A :%d\n", SIZE_A);
+        printf("size L :%d\n", SIZE_L);
+    }
     printf("controls set, DEBUG = %s \n", control.DEBUG?"on":"off");
 
     struct LamportQueue lidar;

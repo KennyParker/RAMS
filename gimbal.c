@@ -88,7 +88,7 @@ void* gimbalController(void *p)
 
 void turn(struct angle *spin, int time ){
 
-    int period = 100;
+    int period = 1000;
     int yawPeriod = period * 17;
     int pitchPeriod = period * 39;
     int rollPeriod = period * 5;
@@ -98,9 +98,12 @@ void turn(struct angle *spin, int time ){
     int rollState = time % rollPeriod;
 
 
-    spin->yaw = 90 * sinf( 2 * M_PI * yawState/yawPeriod );
-    spin->pitch = 40 * sinf( 2 * M_PI * pitchState/pitchPeriod );
-    spin->roll = 10 * sinf( 2 * M_PI * rollState/rollPeriod );
+    // spin->yaw = 90 * sinf( 2 * M_PI * yawState/yawPeriod );
+    spin->pitch = 20 * sinf( 2 * M_PI * pitchState/pitchPeriod );
+    // spin->roll = 10 * sinf( 2 * M_PI * rollState/rollPeriod );
+
+    spin->yaw = 0;
+    spin->roll = 0;
 
     printf("y%f\t p%f\t r%f \n", spin->yaw, spin->pitch, spin->roll);
 } 

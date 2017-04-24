@@ -35,6 +35,7 @@ void* gimbalController(void *p)
     int i = 1;
     int scan_start;
     struct timespec now, scan;
+    int step = 0;
 
     //struct attitude aim = {0};
     int basecamUart = openUart();
@@ -52,17 +53,14 @@ void* gimbalController(void *p)
     aim.pitch = 0;
     aim.roll = 0;
 
-    clock_gettime(CLOCK_REALTIME, &scan);
-    now = scan;
-    scan_start = (scan.tv_sec - *c->start_time) * 1000 + (scan.tv_nsec) / 1.0e6 ;
-
     sendCommand(basecamUart, SBGC_CMD_MOTORS_ON, 0, 0);
 
     while( !*c->STOP ){
        
         usleep( A_TIME );
 	    
-        turn( &aim, (now.tv_sec - scan_start) * 1000 + (now.tv_nsec) / 1.0e6 );
+        if(step>1000) step =0;
+        turn( &aim, step++ );
 
         cmd_control_data.angleROLL = aim.roll ;
         cmd_control_data.anglePITCH = aim.pitch ;
@@ -86,20 +84,20 @@ void* gimbalController(void *p)
     return 0;
 }
 
-void turn(struct angle *spin, int time ){
+void turn(struct angle *spin, int step ){
 
-    int period = 100;
+    int period = 1000;
     int yawPeriod = period * 17;
     int pitchPeriod = period * 39;
     int rollPeriod = period * 5;
 
-    int yawState = time % yawPeriod;
-    int pitchState = time % pitchPeriod;
-    int rollState = time % rollPeriod;
+    int yawState = step % yawPeriod;
+    int pitchState = step % pitchPeriod;
+    int rollState = step % rollPeriod;
 
 
     // spin->yaw = 90 * sinf( 2 * M_PI * yawState/yawPeriod );
-    spin->pitch = 20 * sinf( 2 * M_PI * pitchState/pitchPeriod );
+    spin->pitch = 30 * sinf( 2 * M_PI * pitchState/pitchPeriod );
     // spin->roll = 10 * sinf( 2 * M_PI * rollState/rollPeriod );
 
     spin->yaw = 0;

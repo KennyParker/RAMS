@@ -21,7 +21,7 @@ void* spectrometer(void *p)
     struct LamportQueue *queue = spectrometer_control->queue;
     struct control *c = spectrometer_control->control;
     
-    printf("reached spectrometer, *c->STOP = %s \n", *c->STOP?"yes":"no");
+    if( ! *c->WRITE_SPECTRA ) return 0;
 
     struct spectral to_push;
 

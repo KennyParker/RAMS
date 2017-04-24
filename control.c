@@ -42,7 +42,7 @@ void* controller(void *p)
 
     // WHITE BALANCE 
     double white_bal[PIXELS];
-    auto_correct(white_bal, c);
+    if( *c->WRITE_SPECTRA ) auto_correct(white_bal, c);
 
 
     struct arg_struct args;

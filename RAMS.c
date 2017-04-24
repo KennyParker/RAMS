@@ -71,7 +71,7 @@ int main(int argc, char *argv[])
     mysql_close(mysql);
 
     pthread_join(t[4], NULL);
-    pthread_join(t[3], NULL);
+    // pthread_join(t[3], NULL);
     pthread_join(t[2], NULL);
     pthread_join(t[1], NULL);
     pthread_join(t[0], NULL);

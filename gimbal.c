@@ -106,7 +106,7 @@ void turn(struct angle *spin, int step ){
     int rollState = step % rollPeriod;
 
     spin->yaw = 90 * sinf( 2 * M_PI * yawState/yawPeriod );
-    spin->pitch = -10 + 60 * sinf( 2 * M_PI * pitchState/pitchPeriod );
+    spin->pitch = 40 * sinf( 2 * M_PI * pitchState/pitchPeriod );
     spin->roll = 10 * sinf( 2 * M_PI * rollState/rollPeriod );
 
     spin->yaw = 0;

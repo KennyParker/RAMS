@@ -37,14 +37,17 @@ void* laserRangefinder(void *p)
         clock_gettime(CLOCK_REALTIME, &now);
         rangefinder.time = (now.tv_sec - *c->start_time) * 1000 + (now.tv_nsec) / 1.0e6 ;
         rangefinder.distance = lidar_read(init);
-        
-        if( *c->DEBUG && *c->OUTPUT ) printf("laser: %d \n", rangefinder.distance );
+        if( rangefinder.distance > 6000 || rangefinder.distance < 0 )
+            printf("absurd laser: %d \n", rangefinder.distance );
+        else{
+            if( *c->DEBUG && *c->OUTPUT ) printf("laser: %d \n", rangefinder.distance );
 
-        if(LamportQueue_push(queue, (void*)&rangefinder) ) // all's well
-            i++;
-        else if( *c->DEBUG ){
-            printf( "laser queue full\n");
-            exit(0);
+            if(LamportQueue_push(queue, (void*)&rangefinder) ) // all's well
+                i++;
+            else if( *c->DEBUG ){
+                printf( "laser queue full\n");
+                exit(0);
+            }
         }
     }
     if(*c->DEBUG) printf("lidar finished \n");

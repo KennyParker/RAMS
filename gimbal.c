@@ -63,7 +63,7 @@ void* gimbalController(void *p)
         turn( &aim, step++ );
         if( *c->DEBUG ) printf("y%f\t p%f\t r%f %c", aim.yaw, aim.pitch, aim.roll, step%10==0?'\n':'\r');
 
-        printf("y%f\t p%f\t r%f \r", aim.yaw, aim.pitch, aim.roll);
+        printf("y%f\t p%f\t r%f \n", aim.yaw, aim.pitch, aim.roll);
 
         cmd_control_data.angleROLL = SBGC_DEGREE_TO_ANGLE(aim.roll) ;
         cmd_control_data.anglePITCH = SBGC_DEGREE_TO_ANGLE(aim.pitch) ;

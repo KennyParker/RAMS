@@ -39,8 +39,11 @@ void* controller(void *p)
         printf("tables cleared!\n");
     }
 
+
+    // WHITE BALANCE 
     double white_bal[PIXELS];
     auto_correct(white_bal, c);
+
 
     struct arg_struct args;
 

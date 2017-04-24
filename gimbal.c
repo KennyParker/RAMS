@@ -61,9 +61,9 @@ void* gimbalController(void *p)
         if(step>65535) step = 0; // prevents iter overflow
         turn( &aim, step++ );
 
-        cmd_control_data.angleROLL = aim.roll ;
+        cmd_control_data.angleROLL = DEGR_OF aim.roll ;
         cmd_control_data.anglePITCH = DEGR_OF aim.pitch ;
-        cmd_control_data.angleYAW =  aim.yaw ;
+        cmd_control_data.angleYAW =  DEGR_OF aim.yaw ;
         
         sendCommand(basecamUart, SBGC_CMD_CONTROL, &cmd_control_data, sizeof(cmd_control_data));
         
@@ -86,18 +86,17 @@ void* gimbalController(void *p)
 void turn(struct angle *spin, int step ){
 
     const int second = 50; // commands per second
-    //const int yawPeriod = 11 * second;
+    const int yawPeriod = 11 * second;
     const int pitchPeriod = 3 * second;
-    //const int rollPeriod = 0.2 * second;
+    const int rollPeriod = 0.2 * second;
 
-    //int yawState = step % yawPeriod;
+    int yawState = step % yawPeriod;
     int pitchState = step % pitchPeriod;
-    //int rollState = step % rollPeriod;
+    int rollState = step % rollPeriod;
 
-
-    // spin->yaw = 90 * sinf( 2 * M_PI * yawState/yawPeriod );
+    spin->yaw = 40 * sinf( 2 * M_PI * yawState/yawPeriod );
     spin->pitch = 45 * sinf( 2 * M_PI * pitchState/pitchPeriod );
-    // spin->roll = 10 * sinf( 2 * M_PI * rollState/rollPeriod );
+    spin->roll = 10 * sinf( 2 * M_PI * rollState/rollPeriod );
 
     spin->yaw = 0;
     spin->roll = 0;

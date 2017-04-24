@@ -59,7 +59,7 @@ void* gimbalController(void *p)
        
         usleep( A_TIME );
 	    
-        if(step>1000) step =0;
+        if(step>65535) step = 0; // prevents iter overflow
         turn( &aim, step++ );
 
         cmd_control_data.angleROLL = aim.roll ;
@@ -86,10 +86,10 @@ void* gimbalController(void *p)
 
 void turn(struct angle *spin, int step ){
 
-    int period = 1000;
-    int yawPeriod = period * 17;
-    int pitchPeriod = period * 39;
-    int rollPeriod = period * 5;
+    const int second = 50; // commands per second
+    const int yawPeriod = 11 * second;
+    const int pitchPeriod = 3 * second;
+    const int rollPeriod = 0.2 * second;
 
     int yawState = step % yawPeriod;
     int pitchState = step % pitchPeriod;

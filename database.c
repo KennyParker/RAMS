@@ -53,7 +53,7 @@ void prepareTable( MYSQL *mysql, MYSQL_STMT *stmt, MYSQL_BIND *bind, enum data_t
             insert = INSERT_SCAN;
             binds = BINDS_SCAN;
         break;
-        case(SPECTRA_TYPE): 
+        case(SPECTRUM_TYPE): 
             insert = INSERT_SPECTRA;
             binds = BINDS_SPECTRA;
         break;

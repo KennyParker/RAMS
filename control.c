@@ -124,14 +124,21 @@ void init_control( struct control *control, int argc, char *argv[] ){
     control->RUN_SPECTROMETER = (bool*)malloc(sizeof(bool));
     *control->RUN_SPECTROMETER = true;
 
-    if( parse_commands( control, argc, argv ) )
+    if( parse_commands( control, argc, argv ) ){
         printf("error in parsing commands\n");
+        printf("Usage:\n"
+        "d = DEBUG\n"
+        "c = CLEAR DATABASE\n"
+        "b = blind (spectrometer)\n"
+        "s = safe (laser off)\n" );
+        exit(1);    
+    }
 }
 
 int parse_commands( struct control *control, int argc, char *argv[] )
 {
     if( argc > 1 ){
-        printf("Based on command lin arguments...\n\n");
+        printf("Based on command line arguments...\n\n");
 
         for( int i=1; i<argc; i++ ){
             if( argv[i][0] == 'd' ){
@@ -150,15 +157,7 @@ int parse_commands( struct control *control, int argc, char *argv[] )
                 *control->RUN_LASER = false;
                 printf("LASER OFF \n");
             }
-
-            else{
-                printf("Usage:\n"
-                    "d = DEBUG\n"
-                    "c = CLEAR DATABASE\n"
-                    "b = blind (spectrometer)\n"
-                    "s = safe (laser off)\n" );
-                return 1;
-            }
+            else return 1; 
         }
     }
     return 0;

@@ -1,16 +1,16 @@
-#define DROP_SCANS "DROP TABLE IF EXISTS scans"
-#define DROP_SPECTRA "DROP TABLE IF EXISTS spectra"
-#define DROP_VOXELS "DROP TABLE IF EXISTS voxels"
+#define DROP_SCANS "DROP TABLE IF EXISTS scan"
+#define DROP_SPECTRA "DROP TABLE IF EXISTS spectrum"
+#define DROP_VOXELS "DROP TABLE IF EXISTS voxel"
 
-#define CREATE_SCANS "CREATE TABLE scans( id INT NOT NULL AUTO_INCREMENT, start_time INT, white_bal TEXT, PRIMARY KEY(id) )"
-#define CREATE_SPECTRA "CREATE TABLE spectra( id INT NOT NULL AUTO_INCREMENT, scan INT REFERENCES scans(id), time INT, exposure INT, spectrum TEXT, PRIMARY KEY(id) )"
-#define CREATE_VOXELS "CREATE TABLE voxels( scan INT REFERENCES scans(id), spectrum INT REFERENCES spectra(id), time INT, x INT, y INT, z INT )"
+#define CREATE_SCANS "CREATE TABLE scan( id INT NOT NULL AUTO_INCREMENT, start_time INT, white_bal TEXT, PRIMARY KEY(id) )"
+#define CREATE_SPECTRA "CREATE TABLE spectrum( id INT NOT NULL AUTO_INCREMENT, time INT, exposure INT, signature TEXT, scan_id INT REFERENCES scan(id), PRIMARY KEY(id) )"
+#define CREATE_VOXELS "CREATE TABLE voxel( time INT, x SMALLINT, y SMALLINT, z SMALLINT, scan_id INT REFERENCES scan(id), spectrum_id INT REFERENCES spectrum(id) )"
 
-#define INSERT_SCAN "INSERT INTO scans( start_time, white_bal ) VALUES(?,?)"
+#define INSERT_SCAN "INSERT INTO scan( start_time, white_bal ) VALUES(?,?)"
 #define BINDS_SCAN 2
-#define INSERT_SPECTRA "INSERT INTO spectra( scan, time, exposure, spectrum ) VALUES(?,?,?,?)"
+#define INSERT_SPECTRA "INSERT INTO spectrum( scan_id, time, exposure, signature ) VALUES(?,?,?,?)"
 #define BINDS_SPECTRA 4
-#define INSERT_VOXEL "INSERT INTO voxels( scan, spectrum, time, x, y, z ) VALUES(?,?,?,?,?,?)"
+#define INSERT_VOXEL "INSERT INTO voxel( scan_id, spectrum_id, time, x, y, z ) VALUES(?,?,?,?,?,?)"
 #define BINDS_VOXEL 6
 
 #define server "localhost"
@@ -21,7 +21,7 @@
 #define encode_start 128
 #define encode_length PIXELS*2+1
 
-enum data_type{ SCAN_TYPE, SPECTRA_TYPE, VOXEL_TYPE };
+enum data_type{ SCAN_TYPE, SPECTRUM_TYPE, VOXEL_TYPE };
 
 struct arg_struct
 {

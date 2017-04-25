@@ -124,7 +124,7 @@ void* consumer(void *p)
 
     if(*c->DEBUG) printf("spec args bound\n");
 
-    prepareTable( mysql, spec_stmt, spec_bind, SPECTRA_TYPE, &spec_args, c );
+    prepareTable( mysql, spec_stmt, spec_bind, SPECTRUM_TYPE, &spec_args, c );
     if(*c->DEBUG) printf("spec table preapred\n");
 
 

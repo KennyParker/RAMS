@@ -110,7 +110,7 @@ void prepareTable( MYSQL *mysql, MYSQL_STMT *stmt, MYSQL_BIND *bind, enum data_t
 
         break;
 
-        case(SPECTRA_TYPE): 
+        case(SPECTRUM_TYPE): 
 
             // parent scan
             bind[0].buffer_type = MYSQL_TYPE_LONG;
@@ -153,24 +153,25 @@ void prepareTable( MYSQL *mysql, MYSQL_STMT *stmt, MYSQL_BIND *bind, enum data_t
             bind[1].is_null= 0;
             bind[1].length= 0;
 
-            // INT X
+            // INT time
             bind[2].buffer_type= MYSQL_TYPE_LONG;
             bind[2].buffer= (char *)args->v_time;
             bind[2].is_null= 0;
             bind[2].length= 0;
 
-            // INT Y
+            // INT x
             bind[3].buffer_type= MYSQL_TYPE_SHORT;
             bind[3].buffer= (char *)args->x;
             bind[3].is_null= 0;
             bind[3].length= 0;
 
+            // INT y
             bind[4].buffer_type= MYSQL_TYPE_SHORT;
             bind[4].buffer= (char *)args->y;
             bind[4].is_null= 0;
             bind[4].length= 0;
 
-            // INT Z
+            // INT z
             bind[5].buffer_type= MYSQL_TYPE_SHORT;
             bind[5].buffer= (char *)args->z;
             bind[5].is_null= 0;

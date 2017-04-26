@@ -63,7 +63,7 @@ void* gimbalController(void *p)
        
         usleep( A_TIME );
 	    
-        if(step == pitchPeriod * rollPeriod * yawPeriod ) step = 0; // prevents iter overflow
+        if(step == pitchPeriod*second * rollPeriod*second * yawPeriod*second ) step = 0; // prevents iter overflow
         turn( &aim, step++ );
         if( *c->DEBUG ) printf("y%f\t p%f\t r%f %c", aim.yaw, aim.pitch, aim.roll, step%10==0?'\n':'\r');
 

@@ -1,6 +1,6 @@
 #include <stdint.h>
 
-#define A_TIME 20000
+#define A_TIME 25000
 #define DEVICE1 "/dev/serial0"
 #define BAUDRATE B115200
 
@@ -9,7 +9,10 @@
 
 #define MAX_SPAN 180
 
-
+#define second 1000000 / A_TIME 
+#define yawPeriod 37 * second;
+#define pitchPeriod 13 * second;
+#define rollPeriod 2 * second;
 
 struct attitude{
 

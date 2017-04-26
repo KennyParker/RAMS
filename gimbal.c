@@ -50,6 +50,8 @@ void* gimbalController(void *p)
     cmd_control_data.speedPITCH = 2.0 * pitchDist / pitchPeriod *SBGC_SPEED_SCALE;
     cmd_control_data.speedROLL = 2.0 * rollDist / rollPeriod * SBGC_SPEED_SCALE;
 
+    printf("y%f \t p%f \t r%f \n", 2.0 * yawDist / yawPeriod, 2.0 * pitchDist / pitchPeriod, 2.0 * rollDist / rollPeriod);
+
 
     aim.yaw = 0;
     aim.pitch = 0;
@@ -108,7 +110,6 @@ void turn(struct angle *spin, int step ){
     //spin->yaw = 0;
     //spin->roll = 0;
     //spin->pitch = 0;
-
 
 }
 

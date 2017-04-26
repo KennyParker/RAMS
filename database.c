@@ -224,45 +224,51 @@ void destroyAll( MYSQL *mysql )
     if( ch != 'K' )
         exit(0);
 
-    printf("...dropping...");
     // while ((ch = getchar()) != '\n' && ch != EOF);
 
-    if (mysql_query(mysql, DROP_SCANS))
-    {
-      fprintf(stderr, " DROP scans TABLE failed\n");
-      fprintf(stderr, " %s\n", mysql_error(mysql));
-      exit(0);
-    }
-    if (mysql_query(mysql, CREATE_SCANS))
-    {
-      fprintf(stderr, " CREATE scans TABLE failed\n");
-      fprintf(stderr, " %s\n", mysql_error(mysql));
-      exit(0);
-    }
-    if (mysql_query(mysql, DROP_SPECTRA))
-    {
-      fprintf(stderr, " DROP spectra TABLE failed\n");
-      fprintf(stderr, " %s\n", mysql_error(mysql));
-      exit(0);
-    }
-    if (mysql_query(mysql, CREATE_SPECTRA))
-    {
-      fprintf(stderr, " CREATE spectra TABLE failed\n");
-      fprintf(stderr, " %s\n", mysql_error(mysql));
-      exit(0);
-    }
     if (mysql_query(mysql, DROP_VOXELS))
     {
       fprintf(stderr, " DROP voxels TABLE failed\n");
       fprintf(stderr, " %s\n", mysql_error(mysql));
       exit(0);
     }
+        if (mysql_query(mysql, DROP_SPECTRA))
+    {
+      fprintf(stderr, " DROP spectra TABLE failed\n");
+      fprintf(stderr, " %s\n", mysql_error(mysql));
+      exit(0);
+    }
+        if (mysql_query(mysql, DROP_SCANS))
+    {
+      fprintf(stderr, " DROP scans TABLE failed\n");
+      fprintf(stderr, " %s\n", mysql_error(mysql));
+      exit(0);
+    }
+    printf("...dropped...");
+
+
+    if (mysql_query(mysql, CREATE_SCANS))
+    {
+      fprintf(stderr, " CREATE scans TABLE failed\n");
+      fprintf(stderr, " %s\n", mysql_error(mysql));
+      exit(0);
+    }
+
+    if (mysql_query(mysql, CREATE_SPECTRA))
+    {
+      fprintf(stderr, " CREATE spectra TABLE failed\n");
+      fprintf(stderr, " %s\n", mysql_error(mysql));
+      exit(0);
+    }
+
     if (mysql_query(mysql, CREATE_VOXELS))
     {
       fprintf(stderr, " CREATE voxels TABLE failed\n");
       fprintf(stderr, " %s\n", mysql_error(mysql));
       exit(0);
     }
+    printf("...renewed...");
+
 }
 
 

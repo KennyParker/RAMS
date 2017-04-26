@@ -10,9 +10,9 @@
 #define MAX_SPAN 180
 
 #define second 1000000 / A_TIME 
-#define yawPeriod 37 * second;
-#define pitchPeriod 13 * second;
-#define rollPeriod 2 * second;
+#define yawPeriod 37 * second
+#define pitchPeriod 13 * second
+#define rollPeriod 2 * second
 
 struct attitude{
 

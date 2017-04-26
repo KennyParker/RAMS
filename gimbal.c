@@ -110,7 +110,7 @@ void turn(struct angle *spin, int step ){
 
     //spin->yaw = 0;
     spin->roll = 0;
-    spin->pitch = 0;
+    //spin->pitch = 0;
 
 
 }

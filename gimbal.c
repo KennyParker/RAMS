@@ -46,9 +46,9 @@ void* gimbalController(void *p)
     SBGC_cmd_control_data cmd_control_data = {0};
     cmd_control_data.mode = SBGC_CONTROL_MODE_ANGLE;
     
-    cmd_control_data.speedYAW = 20 * yawDist / yawPeriod * SBGC_SPEED_SCALE;
-    cmd_control_data.speedPITCH = 20 * pitchDist / pitchPeriod * SBGC_SPEED_SCALE;
-    cmd_control_data.speedROLL = 20 * rollDist / rollPeriod * SBGC_SPEED_SCALE;
+    cmd_control_data.speedYAW = 2 * yawDist / yawPeriod * SBGC_SPEED_SCALE;
+    cmd_control_data.speedPITCH = 2 * pitchDist / pitchPeriod * SBGC_SPEED_SCALE;
+    cmd_control_data.speedROLL = 2 * rollDist / rollPeriod * SBGC_SPEED_SCALE;
 
     printf("ya%f \t pi%f \t ro%f \n", 2.0 * yawDist / yawPeriod, 2.0 * pitchDist / pitchPeriod, 2.0 * rollDist / rollPeriod);
 
@@ -108,8 +108,8 @@ void turn(struct angle *spin, int step ){
     spin->roll = rollDist * sinf( 2 * M_PI * rollState / (rollPeriod * second) );
 
     spin->yaw = 0;
-    //spin->roll = 0;
-    spin->pitch = 0;
+    spin->roll = 0;
+    //spin->pitch = 0;
 
 }
 

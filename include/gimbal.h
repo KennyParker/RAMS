@@ -1,6 +1,6 @@
 #include <stdint.h>
 
-#define A_TIME 25000.0
+#define A_TIME 50000.0
 #define DEVICE1 "/dev/serial0"
 #define BAUDRATE B115200
 

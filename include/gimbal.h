@@ -11,9 +11,9 @@
 
 #define second (1000000.0 / A_TIME) 
 
-#define yawPeriod (37.0 * second)
-#define pitchPeriod (13.0 * second)
-#define rollPeriod (2.0 * second)
+#define yawPeriod 	37.0
+#define pitchPeriod 13.0
+#define rollPeriod	2.0
 
 #define yawDist		90.0
 #define pitchDist	45.0

@@ -90,6 +90,7 @@ void auto_correct( double *white_bal, struct control *c )
     int max_val;
     int clip_count;
     char wipe, ch;
+    char buffer[50];
 
     double spectrum[PIXELS];
     open_spectrometer();
@@ -127,9 +128,12 @@ void auto_correct( double *white_bal, struct control *c )
             discontent = false;
             // while ((ch = getchar()) != '\n' && ch != EOF);
         }
-        else{ 
+        else{
+            while ((ch = getchar()) != '\n' && ch != EOF);
             printf("Please enter a new exposure:\n");
-            scanf("%d", c->exposure);
+            fgets( buffer, 50, stdin );
+            *c->exposure = atoi( buffer );
+            //scanf("%d", c->exposure);
             printf("Attempting exposure %d\n\n", *c->exposure);
         }
 

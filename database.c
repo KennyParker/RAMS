@@ -215,17 +215,13 @@ void array2string( double* spectrum, unsigned char* string )
 
 void destroyAll( MYSQL *mysql )
 {
-
+    char buffer[50];
     printf("If you need to clear all data and \n"
            "reinitialize the tables, enter a K...\n"
            "Otherwise, rethink... \n");
-    char wipe, ch = getchar();
-    while ((wipe = getchar()) != '\n' && wipe != EOF) ;
-    //char ch = 'K';
-    if( ch != 'K' )
+    fgets( buffer, 50, stdin );
+    if( buffer[0] != 'K' )
         exit(0);
-
-    while ((ch = getchar()) != '\n' && ch != EOF);
 
     if (mysql_query(mysql, DROP_VOXELS))
     {

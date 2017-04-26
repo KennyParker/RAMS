@@ -230,6 +230,9 @@ void convert(struct laser *point, struct angle *angle1, struct angle *angle2, in
         *y = point->distance * sinf(inclination) * sinf(azimuth);
         *z = point->distance * cosf(inclination);
 
+
+        printf("x%d\ty%d\tz%d    y%.2f\tp%.2f\tr%.2f\n");
+
         /* outside function version
 
             normalized = (float)(point.time-angle1.time) / (float)(angle2.time-angle1.time); 

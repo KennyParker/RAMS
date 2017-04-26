@@ -117,6 +117,7 @@ void auto_correct( double *white_bal, struct control *c )
 
         printf("The exposure was set to %d\n", *c->exposure);
         printf("If this is acceptable, enter K\n");
+        
         fgets( buffer, 50, stdin );
         if(buffer[0]=='K'){
             memcpy(white_bal, spectrum, sizeof(spectrum));

@@ -89,7 +89,7 @@ void auto_correct( double *white_bal, struct control *c )
     bool discontent = true;
     int max_val;
     int clip_count;
-    char ch;
+    char wipe, ch;
 
     double spectrum[PIXELS];
     open_spectrometer();
@@ -118,6 +118,7 @@ void auto_correct( double *white_bal, struct control *c )
         printf("The exposure was set to %d\n", *c->exposure);
         printf("If this is acceptable, enter K\n");
         ch = getchar();
+        while ((wipe = getchar()) != '\n' && wipe != EOF) ;
         //ch = 'K';
         if(ch=='K'){
             memcpy(white_bal, spectrum, sizeof(spectrum));
@@ -130,7 +131,6 @@ void auto_correct( double *white_bal, struct control *c )
             printf("Please enter a new exposure:\n");
             scanf("%d", c->exposure);
             printf("Attempting exposure %d\n\n", *c->exposure);
-            while ((ch = getchar()) != '\n' && ch != EOF);
         }
 
     }while(discontent);

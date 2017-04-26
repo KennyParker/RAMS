@@ -4,7 +4,7 @@
 
 #define CREATE_SCANS "CREATE TABLE scan( id INT NOT NULL AUTO_INCREMENT, start_time INT, white_bal TEXT, PRIMARY KEY(id) )"
 #define CREATE_SPECTRA "CREATE TABLE spectrum( id INT NOT NULL AUTO_INCREMENT, time INT, exposure INT, signature TEXT, scan_id INT REFERENCES scan(id), PRIMARY KEY(id) )"
-#define CREATE_VOXELS "CREATE TABLE voxel( time INT, x SMALLINT, y SMALLINT, z SMALLINT, scan_id INT REFERENCES scan(id), spectrum_id INT REFERENCES spectrum(id) )"
+#define CREATE_VOXELS "CREATE TABLE voxel(  id INT NOT NULL AUTO_INCREMENT, time INT, x SMALLINT, y SMALLINT, z SMALLINT, scan_id INT REFERENCES scan(id), spectrum_id INT REFERENCES spectrum(id) )"
 
 #define INSERT_SCAN "INSERT INTO scan( start_time, white_bal ) VALUES(?,?)"
 #define BINDS_SCAN 2

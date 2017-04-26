@@ -224,7 +224,7 @@ void destroyAll( MYSQL *mysql )
     if( ch != 'K' )
         exit(0);
 
-    // while ((ch = getchar()) != '\n' && ch != EOF);
+    while ((ch = getchar()) != '\n' && ch != EOF);
 
     if (mysql_query(mysql, DROP_VOXELS))
     {

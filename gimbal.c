@@ -98,7 +98,7 @@ void* gimbalController(void *p)
     while( ! *c->FINISHED ) // wait up
       ;
     return 0;
-}
+} 
 
 void turn(struct angle *spin, int step ){
 

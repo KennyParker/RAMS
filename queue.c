@@ -12,6 +12,7 @@
 #include "spectrometer.h"
 #include "queue.h"
 
+
 void LamportQueue_init(struct LamportQueue *queue, enum queue_type type)
 {
     atomic_init(&queue->front_, 0);

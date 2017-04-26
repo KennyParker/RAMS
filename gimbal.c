@@ -46,8 +46,10 @@ void* gimbalController(void *p)
     SBGC_cmd_control_data cmd_control_data = {0};
     cmd_control_data.mode = SBGC_CONTROL_MODE_ANGLE;
     
-    cmd_control_data.speedROLL = cmd_control_data.speedPITCH = cmd_control_data.speedYAW = 30 * SBGC_SPEED_SCALE;
-    // cmd_control_data.speedPITCH = 90 * SBGC_SPEED_SCALE;
+    cmd_control_data.speedYAW = 2.0 * yawDist / yawPeriod * SBGC_SPEED_SCALE;
+    cmd_control_data.speedPITCH = 2.0 * pitchDist / pitchPeriod *SBGC_SPEED_SCALE;
+    cmd_control_data.speedROLL = 2.0 * rollDist / rollPeriod * SBGC_SPEED_SCALE;
+
 
     aim.yaw = 0;
     aim.pitch = 0;
@@ -74,7 +76,7 @@ void* gimbalController(void *p)
         clock_gettime(CLOCK_REALTIME, &now);
         aim.time = (now.tv_sec - *c->start_time) * 1000 + (now.tv_nsec) / 1.0e6 ;
 
-        if(LamportQueue_push(queue, (void*)&aim) ) // all's well
+        if(LamportQueue_push(queue, (void*)&aim) )  // all's well
             i++;
         else if( *c->DEBUG ) printf( "angle queue full\n");
     }

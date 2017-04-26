@@ -83,7 +83,7 @@ void* gimbalController(void *p)
     cmd_control_data.angleROLL = 0;
     cmd_control_data.anglePITCH = 0;
     cmd_control_data.angleYAW = 0;
-    
+
     sendCommand(basecamUart, SBGC_CMD_CONTROL, &cmd_control_data, sizeof(cmd_control_data));
     usleep( 5.0e6 );
     sendCommand(basecamUart, SBGC_CMD_MOTORS_OFF, 0, 0);
@@ -110,9 +110,9 @@ void turn(struct angle *spin, int step ){
     spin->pitch = 40 * sinf( 2 * M_PI * pitchState/pitchPeriod );
     spin->roll = 10 * sinf( 2 * M_PI * rollState/rollPeriod );
 
-    spin->yaw = 0;
+    //spin->yaw = 0;
     spin->roll = 0;
-    // spin->pitch = 0;
+    spin->pitch = 0;
 
 
 }

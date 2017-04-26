@@ -46,9 +46,9 @@ void* gimbalController(void *p)
     SBGC_cmd_control_data cmd_control_data = {0};
     cmd_control_data.mode = SBGC_CONTROL_MODE_ANGLE;
     
-    cmd_control_data.speedYAW = 40 * yawDist / yawPeriod * SBGC_SPEED_SCALE;
-    cmd_control_data.speedPITCH = 40 * pitchDist / pitchPeriod * SBGC_SPEED_SCALE;
-    cmd_control_data.speedROLL = 40 * rollDist / rollPeriod * SBGC_SPEED_SCALE;
+    cmd_control_data.speedYAW = 4 * yawDist / yawPeriod * SBGC_SPEED_SCALE;
+    cmd_control_data.speedPITCH = 4 * pitchDist / pitchPeriod * SBGC_SPEED_SCALE;
+    cmd_control_data.speedROLL = 4 * rollDist / rollPeriod * SBGC_SPEED_SCALE;
 
     printf("ya%f \t pi%f \t ro%f \n", 2.0 * yawDist / yawPeriod, 2.0 * pitchDist / pitchPeriod, 2.0 * rollDist / rollPeriod);
 

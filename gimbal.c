@@ -107,8 +107,8 @@ void turn(struct angle *spin, int step ){
     spin->pitch = pitchDist * sinf( 2 * M_PI * pitchState / (pitchPeriod * second) );
     spin->roll = rollDist * sinf( 2 * M_PI * rollState / (rollPeriod * second) );
 
-    spin->yaw = 0;
-    //spin->roll = 0;
+    //spin->yaw = 0;
+    spin->roll = 0;
     spin->pitch = 0;
 
 }

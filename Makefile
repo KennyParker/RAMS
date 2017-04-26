@@ -23,3 +23,6 @@ $(TARGET): $(OBJECTS)
 clean:
 	-rm -f *.o
 	-rm -f $(TARGET)
+
+gimbal:
+	-rm -f gimbal.o

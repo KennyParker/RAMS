@@ -13,7 +13,7 @@
 
 #define yawPeriod 	51.0
 #define pitchPeriod 13.0
-#define rollPeriod	2.0
+#define rollPeriod	3.0
 
 #define yawDist		90.0
 #define pitchDist	45.0

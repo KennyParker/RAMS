@@ -26,3 +26,4 @@ clean:
 
 gimbal:
 	-rm -f gimbal.o
+	make

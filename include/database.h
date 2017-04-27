@@ -18,7 +18,7 @@
 #define password "raspberry"
 #define database "RAMS"
 
-#define encode_start '!'
+#define encode_start '$'
 #define encode_length PIXELS*4+1
 
 enum data_type{ SCAN_TYPE, SPECTRUM_TYPE, VOXEL_TYPE };

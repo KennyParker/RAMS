@@ -119,7 +119,7 @@ void init_control( struct control *control, int argc, char *argv[] ){
     *control->CLEAR = false;
 
     control->RUN_LASER = (bool*)malloc(sizeof(bool));
-    *control->RUN_LASER = true;
+    *control->RUN_LASER = false;
 
     control->RUN_SPECTROMETER = (bool*)malloc(sizeof(bool));
     *control->RUN_SPECTROMETER = true;
@@ -153,9 +153,9 @@ int parse_commands( struct control *control, int argc, char *argv[] )
                 *control->RUN_SPECTROMETER = false;
                 printf("SPECTROMETER OFF \n");
             }
-            else if( argv[i][0] == 's' ){
-                *control->RUN_LASER = false;
-                printf("LASER OFF \n");
+            else if( argv[i][0] == 'l' ){
+                *control->RUN_LASER = true;
+                printf("LASER ON \n");
             }
             else return 1; 
         }

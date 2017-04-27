@@ -162,6 +162,7 @@ int parse_commands( struct control *control, int argc, char *argv[] )
                 char ch = 'f';
                 while(ch==f){
                     sendCommand(basecamUart, SBGC_CMD_MOTORS_OFF, 0, 0);
+                    usleep(200000);
                     ch = getchar();
                 }
                 exit(0);

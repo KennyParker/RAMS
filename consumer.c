@@ -141,10 +141,13 @@ void* consumer(void *p)
 
             while(! LamportQueue_pop(angles, &angle2)) // wait for next angle
                 if( *c->STOP ){
-                    printf("c stop\n");
                     finished = true;
                     break;
                 }
+
+            if( angle2.time <3 ){
+                printf("ouch: a1t: %d, a2t: %d \n", angle1.time, angle2.time );
+            }
     
         }
         if( point.time > mid_gap ){

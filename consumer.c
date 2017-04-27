@@ -183,7 +183,10 @@ void* consumer(void *p)
 
         if(*c->DEBUG) printf("entered vox write stage \n");
 
-        if(*c->RUN_LASER) convert( &point, &angle1, &angle2, &x, &y, &z );
+        if(*c->RUN_LASER){
+            printf("laser broken\n");
+            convert( &point, &angle1, &angle2, &x, &y, &z );
+        }
         else flat_convert( &point, &angle1, &angle2, &x, &y, &z );
 
         if(*c->DEBUG) printf("passed convert\n");

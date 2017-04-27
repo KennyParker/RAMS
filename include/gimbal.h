@@ -13,10 +13,10 @@
 
 #define yawPeriod 	123.0
 #define pitchPeriod 19.0
-#define rollPeriod	17.0
+#define rollPeriod	67.0
 
 #define yawDist		90.0
-#define pitchDist	30.0
+#define pitchDist	25.0
 #define rollDist	10.0
 
 struct attitude{

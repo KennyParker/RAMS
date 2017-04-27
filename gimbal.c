@@ -197,3 +197,20 @@ void sendCommand(int uart, uint8_t cmd, void *data, uint16_t size)
         printf( "too large\n" );
     }
 }
+void killmotors(){
+
+    int basecamUart = openUart();
+    if(basecamUart == -1){
+        perror("basecamUart didn't open\n");
+        exit(0);
+    }
+    char ch = 'f';
+    while(ch!='K'){
+        sendCommand(basecamUart, SBGC_CMD_MOTORS_OFF, 0, 0);
+        usleep(200000);
+        ch = getchar();
+    }
+
+}
+
+

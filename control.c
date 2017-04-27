@@ -8,6 +8,7 @@
 
 #include "control.h"
 #include "database.h"
+#include "queue.h"
 #include "gimbal.h"
 #include "spectrometer.h"
 
@@ -159,12 +160,7 @@ int parse_commands( struct control *control, int argc, char *argv[] )
                 printf("LASER ON \n");
             }
             else if( argv[i][0] == 'f' ){
-                char ch = 'f';
-                while(ch==f){
-                    sendCommand(basecamUart, SBGC_CMD_MOTORS_OFF, 0, 0);
-                    usleep(200000);
-                    ch = getchar();
-                }
+                killmotors();
                 exit(0);
             }
             else return 1; 

@@ -141,6 +141,7 @@ void* consumer(void *p)
 
             while(! LamportQueue_pop(angles, &angle2)) // wait for next angle
                 if( *c->STOP ){
+                    printf("c stop\n");
                     finished = true;
                     break;
                 }

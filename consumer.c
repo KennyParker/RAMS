@@ -148,17 +148,21 @@ void* consumer(void *p)
                     break;
                 }
 
-            }while( !angle2.time ); //hack to avoid popped bas data
+            } while( angle2.time < 1 ); //hack to avoid popped bas data
     
         }
         if( point.time > mid_gap ){
             spectrum1 = spectrum2;
 
-            while(! LamportQueue_pop(spectral, &spectrum2)) // wait for next spectra
+            spectrum2.time = 0;
+            do{
+                while(! LamportQueue_pop(spectral, &spectrum2)) // wait for next spectra
                 if( *c->STOP ){
                     finished = true ;
                     break;
                 }
+            } while( spectrum2.time < 1);
+            
 
             mid_gap = (spectrum1.time + spectrum1.exposure/1.0e3 + spectrum2.time) / 2.0;
             
@@ -188,11 +192,15 @@ void* consumer(void *p)
         if( *c->OUTPUT )
             printf("dist written: %d \n", point.distance );
 
-        while(! LamportQueue_pop(lidar, &point)) // wait for next point
+        point.time = 0;
+        do{
+            while(! LamportQueue_pop(lidar, &point)) // wait for next point
             if( *c->STOP ){
                     finished = true ;
                     break;
             }
+        }while( point.time < 1);
+        
     
     } while( ! finished );
     usleep(2.0e6);

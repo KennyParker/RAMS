@@ -12,12 +12,12 @@
 #define second (1000000.0 / A_TIME) 
 
 #define yawPeriod 	123.0
-#define pitchPeriod 13.0
-#define rollPeriod	37.0
+#define pitchPeriod 9.0
+#define rollPeriod	57.0
 
-#define yawDist		60.0
+#define yawDist		90.0
 #define pitchDist	40.0
-#define rollDist	5.0
+#define rollDist	45.0
 
 struct attitude{
 

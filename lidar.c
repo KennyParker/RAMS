@@ -41,7 +41,7 @@ void* laserRangefinder(void *p)
         else rangefinder.distance = 42;
 
 
-        if( rangefinder.distance > 6000 || rangefinder.distance < 0 )
+        if( rangefinder.distance > 6000 || rangefinder.distance < 1 )
             printf("absurd laser: %d \n", rangefinder.distance );
         else{
             if( *c->DEBUG && *c->OUTPUT ) printf("laser: %d \n", rangefinder.distance );

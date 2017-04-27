@@ -65,7 +65,7 @@ void* gimbalController(void *p)
 	    
         if(step > (pitchPeriod*second * rollPeriod*second * yawPeriod*second) ){
             step = 0; // prevents iter overflow
-            printf(" OVERFLOW PREVENTED\n");
+            printf("OVERFLOW PREVENTED\n");
         }
         turn( &aim, step++ );
 
@@ -96,20 +96,20 @@ void* gimbalController(void *p)
     
     while( ! *c->FINISHED ) // wait up
       ;
-    return 0;
+    return 0; 
 } 
 
 void turn(struct angle *spin, int step ){
 
-    int yawState = step % (int)(yawPeriod * second);
+    // int yawState = step % (int)(yawPeriod * second);
     int pitchState = step % (int)(pitchPeriod * second);
     int rollState = step % (int)(rollPeriod * second);
  
-    spin->yaw = yawDist * sinf( 2 * M_PI * yawState / (yawPeriod * second) );
+    // spin->yaw = yawDist * sinf( 2 * M_PI * yawState / (yawPeriod * second) );
     spin->pitch = pitchDist * sinf( 2 * M_PI * pitchState / (pitchPeriod * second) );
     spin->roll = rollDist * sinf( 2 * M_PI * rollState / (rollPeriod * second) );
 
-    //spin->yaw = 0;
+    spin->yaw = 0;
     //spin->roll = 0;
     //spin->pitch = 0;
 

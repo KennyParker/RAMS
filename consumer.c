@@ -273,6 +273,7 @@ void flat_convert(struct laser *point, struct angle *angle1, struct angle *angle
         *x = range * sinf(inclination) * cosf(azimuth);
         *y = range * sinf(inclination) * sinf(azimuth);
 
+        *z -= 160;
         printf("x%d\ty%d\tz%d    y%.2f\tp%.2f\tr%.2f\n",*x,*y,*z, DEGR_OF yaw, DEGR_OF pitch, DEGR_OF roll);
 }
 

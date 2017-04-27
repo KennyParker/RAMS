@@ -156,7 +156,7 @@ void lidar()     // unused, complete and prints status
 	fd = lidar_init(true);
 
   printf("attempting reset\n");
-  wiringPiI2CWriteReg8(fd, 0x00, 0x00);
+  wiringPiI2CWrite(fd, 0x00);
   printf("fpga should be cleared\n");
   usleep(2000000);
 

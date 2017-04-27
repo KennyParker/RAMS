@@ -8,9 +8,9 @@
 
 #include "control.h"
 #include "database.h"
+#include "spectrometer.h"
 #include "queue.h"
 #include "gimbal.h"
-#include "spectrometer.h"
 
 
 void* controller(void *p)

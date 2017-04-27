@@ -205,13 +205,12 @@ void array2string( double* spectrum, unsigned char* string )
         temp = spectrum[i];
             // printf("%f -> %d\n",spectrum[i],temp);
 
-        string[4*i]  = encode_start + (temp>>12 & 0xF); 
-        string[4*i+1] = encode_start + (temp>>8 & 0xF);
-        string[4*i+2] = encode_start + (temp>>4 & 0xF); 
-        string[4*i+3] = encode_start +  (temp   & 0xF);
+        string[4*i]  = encode_start + ( (temp>>12) & 0xF); 
+        string[4*i+1] = encode_start + ( (temp>>8) & 0xF);
+        string[4*i+2] = encode_start + ( (temp>>4) & 0xF); 
+        string[4*i+3] = encode_start +  ( temp   & 0xF);
             // printf("%d~%d",string[2*i],string[2*i+1]);
     }
-    string[encode_length-1] = '\0';
 }
 
 void destroyAll( MYSQL *mysql )

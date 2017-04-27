@@ -19,7 +19,7 @@
 #define database "RAMS"
 
 #define encode_start '$'
-#define encode_length PIXELS*4+1
+#define encode_length PIXELS*4
 
 enum data_type{ SCAN_TYPE, SPECTRUM_TYPE, VOXEL_TYPE };
 

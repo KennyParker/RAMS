@@ -147,7 +147,7 @@ unsigned char  _read_byte_raw(int fd, int reg, bool allowZero) {
     }   
 }
 
-void lidar()    // unused, complete and prints status
+void lidar()     // unused, complete and prints status
 {
 	int fd, res, i, del=1000;
     unsigned char st;

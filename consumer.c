@@ -261,7 +261,7 @@ void flat_convert(struct laser *point, struct angle *angle1, struct angle *angle
         pitch = RADS_OF ( angle1->pitch + normalized * (angle2->pitch - angle1->pitch) );
         roll = RADS_OF ( angle1->roll + normalized * (angle2->roll - angle1->roll) );
 
-        *z = 150 + rand()%15;
+        *z = 1 + rand()%5;
         azimuth = atan2f( roll, pitch ) - yaw + RADS_OF 90;
         inclination = sqrtf( roll*roll + pitch*pitch );
 

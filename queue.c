@@ -70,7 +70,7 @@ bool LamportQueue_push(struct LamportQueue *queue, void* elem)
     else if(queue->type == ANGLE_TYPE){ 
         queue->a_data[b] = *(struct angle*)elem;
 
-        if( (*(struct angle*)elem)->time <3 )
+        if( elem->time <3 )
             printf("error pushed 0\n");
         
     }
@@ -118,7 +118,7 @@ bool LamportQueue_pop(struct LamportQueue *queue, void* elem)
         struct angle* popped = (struct angle*)elem;
         *popped = queue->a_data[f];
 
-        if( *popped->time <3 ){
+        if( elem->time <3 ){
             printf("error popped 0\n");
         }
 

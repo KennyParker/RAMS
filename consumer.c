@@ -183,7 +183,9 @@ void* consumer(void *p)
 
         if(*c->DEBUG) printf("entered vox write stage \n");
 
-        convert( &point, &angle1, &angle2, &x, &y, &z );
+        if(*c->RUN_LASER) convert( &point, &angle1, &angle2, &x, &y, &z );
+        else flat_convert( &point, &angle1, &angle2, &x, &y, &z );
+
         if(*c->DEBUG) printf("passed convert\n");
         v_time = point.time;
 
@@ -231,11 +233,6 @@ void convert(struct laser *point, struct angle *angle1, struct angle *angle2, in
         static float normalized, yaw, pitch, roll, azimuth, inclination;
 
         normalized = (float)(point->time-angle1->time) / (float)(angle2->time-angle1->time); 
-
-        if( normalized < 0 || normalized > 1 ){
-            printf("ouch:\t p time = %d, a1 time = %d, a2 time = %d \n", point->time, angle1->time, angle2->time );
-            exit(1);
-        }
     
         yaw = RADS_OF ( angle1->yaw + normalized * (angle2->yaw - angle1->yaw) );
         pitch = RADS_OF ( angle1->pitch + normalized * (angle2->pitch - angle1->pitch) );
@@ -250,31 +247,28 @@ void convert(struct laser *point, struct angle *angle1, struct angle *angle2, in
 
 
         printf("x%d\ty%d\tz%d    y%.2f\tp%.2f\tr%.2f\n",*x,*y,*z, DEGR_OF yaw, DEGR_OF pitch, DEGR_OF roll);
+}
 
-        /* outside function version
+void flat_convert(struct laser *point, struct angle *angle1, struct angle *angle2, int *x, int *y, int *z)
+{
+        static float normalized, yaw, pitch, roll, azimuth, inclination, range;
 
-            normalized = (float)(point.time-angle1.time) / (float)(angle2.time-angle1.time); 
-        
-            if(*c->DEBUG) printf("normalized = %f\n", normalized );
+        normalized = (float)(point->time-angle1->time) / (float)(angle2->time-angle1->time); 
+    
+        yaw = RADS_OF ( angle1->yaw + normalized * (angle2->yaw - angle1->yaw) );
+        pitch = RADS_OF ( angle1->pitch + normalized * (angle2->pitch - angle1->pitch) );
+        roll = RADS_OF ( angle1->roll + normalized * (angle2->roll - angle1->roll) );
 
-            yaw = RADS_OF ( angle1.yaw + normalized * (angle2.yaw - angle1.yaw) );
-            pitch = RADS_OF ( angle1.pitch + normalized * (angle2.pitch - angle1.pitch) );
-            roll = RADS_OF ( angle1.roll + normalized * (angle2.roll - angle1.roll) );
+        *z = 160;
+        azimuth = atan2f( roll, pitch ) - yaw + RADS_OF 90;
+        inclination = sqrtf( roll*roll + pitch*pitch );
 
-            azimuth = atan2f( roll, pitch ) - yaw - RADS_OF 90;
-            inclination = sqrtf( roll*roll + pitch*pitch );
+        range = z / cosf(inclination);
 
-            x = point.distance * sinf(inclination) * cosf(azimuth);
-            if(*c->DEBUG) printf("x = %d\n", x);
+        *x = range * sinf(inclination) * cosf(azimuth);
+        *y = range * sinf(inclination) * sinf(azimuth);
 
-            y = point.distance * sinf(inclination) * sinf(azimuth);
-            if(*c->DEBUG) printf("y = %d\n", y);
-
-
-            z = point.distance * cosf(inclination);
-            if(*c->DEBUG) printf("z = %d\n", z);
-
-        */
+        printf("x%d\ty%d\tz%d    y%.2f\tp%.2f\tr%.2f\n",*x,*y,*z, DEGR_OF yaw, DEGR_OF pitch, DEGR_OF roll);
 }
 
 void triInitialize( struct consumeAll *all, struct laser *point, struct angle *angle1, struct angle *angle2, struct spectral *spectrum1, struct spectral *spectrum2, struct control *c)

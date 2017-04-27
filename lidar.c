@@ -159,15 +159,13 @@ void lidar()     // unused, complete and prints status
         printf("initialization error\n");
     }
     else {
-        for (i=0;i<40;i++) {
-            res = lidar_read(fd);
-            st = lidar_status(fd);
-            //ver = lidar_version(fd);
-            
-            printf("%3.0d cm \n", res);
-            lidar_status_print(st);
-            
-            usleep(del);
-        }
+          res = lidar_read(fd);
+          st = lidar_status(fd);
+          //ver = lidar_version(fd);
+          
+          printf("%3.0d cm \n", res);
+          lidar_status_print(st);
+          
+          usleep(del);
     }
 }

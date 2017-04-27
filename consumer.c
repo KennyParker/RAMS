@@ -138,16 +138,17 @@ void* consumer(void *p)
 
         if( point.time > angle2.time ){
             angle1 = angle2;
-
-            while(! LamportQueue_pop(angles, &angle2)) // wait for next angle
+            
+            angle2.time = 0;
+            do{
+                while(! LamportQueue_pop(angles, &angle2)) // wait for next angle
+                    ;
                 if( *c->STOP ){
-                    finished = true;
+                    finished = true ;
                     break;
                 }
 
-            if( angle2.time <3 ){
-                printf("ouch: a1t: %d, a2t: %d \n", angle1.time, angle2.time );
-            }
+            }while( !angle2.time ); //hack to avoid popped bas data
     
         }
         if( point.time > mid_gap ){

@@ -26,6 +26,8 @@ MYSQL *mysql;
 
 int main(int argc, char *argv[])
 {
+    lidar();
+
 
     mysql = mysql_init(NULL);
 

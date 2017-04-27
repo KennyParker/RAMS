@@ -153,7 +153,7 @@ void lidar()    // unused, complete and prints status
     unsigned char st;
 	// unsigned char ver;
 
-	fd = lidar_init(false);
+	fd = lidar_init(true);
    
     if (fd == -1) {
         printf("initialization error\n");

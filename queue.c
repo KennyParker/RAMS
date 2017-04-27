@@ -70,8 +70,8 @@ bool LamportQueue_push(struct LamportQueue *queue, void* elem)
     else if(queue->type == ANGLE_TYPE){ 
         queue->a_data[b] = *(struct angle*)elem;
 
-        if( queue->a_data[b].time <3 )
-            printf("error pushed 0\n");
+        //if( queue->a_data[b].time <3 )
+        //    printf("error pushed 0\n");
         
     }
     else{ // (queue->type == SPECTRAL_TYPE){
@@ -118,9 +118,9 @@ bool LamportQueue_pop(struct LamportQueue *queue, void* elem)
         struct angle* popped = (struct angle*)elem;
         *popped = queue->a_data[f];
 
-        if( queue->a_data[f].time <3 ){
-            printf("error popped 0\n");
-        }
+        //if( queue->a_data[f].time <3 )
+        //    printf("error popped 0\n");
+        
 
         atomic_store_explicit(&queue->front_, (f + 1) % SIZE_A, memory_order_release);
     }

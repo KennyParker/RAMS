@@ -252,6 +252,8 @@ void convert(struct laser *point, struct angle *angle1, struct angle *angle2, in
 void flat_convert(struct laser *point, struct angle *angle1, struct angle *angle2, int *x, int *y, int *z)
 {
         static float normalized, yaw, pitch, roll, azimuth, inclination, range;
+        time_t t;
+        srand((unsigned) time(&t));
 
         normalized = (float)(point->time-angle1->time) / (float)(angle2->time-angle1->time); 
     
@@ -259,7 +261,7 @@ void flat_convert(struct laser *point, struct angle *angle1, struct angle *angle
         pitch = RADS_OF ( angle1->pitch + normalized * (angle2->pitch - angle1->pitch) );
         roll = RADS_OF ( angle1->roll + normalized * (angle2->roll - angle1->roll) );
 
-        *z = 160;
+        *z = 150 + rand()%15;
         azimuth = atan2f( roll, pitch ) - yaw + RADS_OF 90;
         inclination = sqrtf( roll*roll + pitch*pitch );
 

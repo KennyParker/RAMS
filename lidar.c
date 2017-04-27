@@ -66,6 +66,7 @@ int lidar_init(bool DEBUG) {
     if (DEBUG) printf("LidarLite V0.1\n\n");
     fd = wiringPiI2CSetup(LIDAR_LITE_ADRS);
     if (fd != -1) {
+        printf("lidar init failed\n");
         lidar_status(fd);  // Dummy request to wake up device
         usleep(100);
         }

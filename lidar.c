@@ -66,7 +66,6 @@ int lidar_init(bool DEBUG) {
     if (DEBUG) printf("LidarLite V0.1\n\n");
     fd = wiringPiI2CSetup(LIDAR_LITE_ADRS);
     if (fd != -1) {
-        printf("lidar init failed\n");
         lidar_status(fd);  // Dummy request to wake up device
         usleep(100);
         }
@@ -150,7 +149,7 @@ unsigned char  _read_byte_raw(int fd, int reg, bool allowZero) {
 
 void lidar()     // unused, complete and prints status
 {
-	int fd, res, i, del=1000;
+	int fd, res, del=1000;
     unsigned char st;
 	// unsigned char ver;
 
@@ -161,7 +160,16 @@ void lidar()     // unused, complete and prints status
   //printf("fpga should be cleared\n");
   //usleep(2000000);
 
-   
+int lo, hi;
+   // Read second byte and append with first 
+  lo = _read_byteNZ(fd, 0x17) ;        
+    // printf(" Lo=%d\n", loVal);
+  // read first byte 
+  hi = _read_byte(fd, 0x16) ;             
+    // printf ("Hi=%d ", hiVal);
+
+  printf("serial = %d\n", ( (hi << 8) + lo) );
+
     if (fd == -1) {
         printf("initialization error\n");
     }

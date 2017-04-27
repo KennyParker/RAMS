@@ -8,6 +8,7 @@
 
 #include "control.h"
 #include "database.h"
+#include "gimbal.h"
 #include "spectrometer.h"
 
 
@@ -156,6 +157,14 @@ int parse_commands( struct control *control, int argc, char *argv[] )
             else if( argv[i][0] == 'l' ){
                 *control->RUN_LASER = true;
                 printf("LASER ON \n");
+            }
+            else if( argv[i][0] == 'f' ){
+                char ch = 'f';
+                while(ch==f){
+                    sendCommand(basecamUart, SBGC_CMD_MOTORS_OFF, 0, 0);
+                    ch = getchar();
+                }
+                exit(0);
             }
             else return 1; 
         }

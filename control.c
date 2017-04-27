@@ -1,6 +1,7 @@
 #include <stdbool.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <stdatomic.h>
 #include <string.h>
 
 #include <my_global.h>

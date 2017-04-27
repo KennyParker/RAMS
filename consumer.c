@@ -218,6 +218,11 @@ void convert(struct laser *point, struct angle *angle1, struct angle *angle2, in
         static float normalized, yaw, pitch, roll, azimuth, inclination;
 
         normalized = (float)(point->time-angle1->time) / (float)(angle2->time-angle1->time); 
+
+        if( normalized < 0 || normalized > 1 ){
+            printf("ouch:\t p time = %d, a1 time = %d, a2 time = %d \n", point->time, angle1->time, angle2->time );
+            exit(1);
+        }
     
         yaw = RADS_OF ( angle1->yaw + normalized * (angle2->yaw - angle1->yaw) );
         pitch = RADS_OF ( angle1->pitch + normalized * (angle2->pitch - angle1->pitch) );

@@ -163,7 +163,6 @@ void* consumer(void *p)
                 }
             } while( spectrum2.time < 1);
             
-
             mid_gap = (spectrum1.time + spectrum1.exposure/1.0e3 + spectrum2.time) / 2.0;
             
             if( *c->DEBUG)
@@ -255,16 +254,19 @@ void convert(struct laser *point, struct angle *angle1, struct angle *angle2, in
 void flat_convert(struct laser *point, struct angle *angle1, struct angle *angle2, int *x, int *y, int *z)
 {
         static float normalized, yaw, pitch, roll, azimuth, inclination, range;
-        time_t t;
-        srand((unsigned) time(&t));
 
-        normalized = (float)(point->time-angle1->time) / (float)(angle2->time-angle1->time); 
-    
-        yaw = RADS_OF ( angle1->yaw + normalized * (angle2->yaw - angle1->yaw) );
-        pitch = RADS_OF ( angle1->pitch + normalized * (angle2->pitch - angle1->pitch) );
-        roll = RADS_OF ( angle1->roll + normalized * (angle2->roll - angle1->roll) );
-
-        *z = 160 + rand()%5;
+        if( abs(point->time - angle1->time) < abs(angle2->time - point->time) ){
+            yaw = RADS_OF angle1->yaw ;
+            pitch = RADS_OF angle1->pitch ;
+            roll = RADS_OF angle1->roll ;
+        }
+        else{
+            yaw = RADS_OF angle2->yaw ;
+            pitch = RADS_OF angle2->pitch ;
+            roll = RADS_OF angle2->roll ;
+        }
+        
+        *z = 160;
         azimuth = atan2f( roll, pitch ) - yaw + RADS_OF 90;
         inclination = sqrtf( roll*roll + pitch*pitch );
 
@@ -272,8 +274,8 @@ void flat_convert(struct laser *point, struct angle *angle1, struct angle *angle
 
         *x = range * sinf(inclination) * cosf(azimuth);
         *y = range * sinf(inclination) * sinf(azimuth);
-
         *z -= 160;
+
         printf("x%d\ty%d\tz%d    y%.2f\tp%.2f\tr%.2f\n",*x,*y,*z, DEGR_OF yaw, DEGR_OF pitch, DEGR_OF roll);
 }
 

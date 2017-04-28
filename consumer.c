@@ -253,7 +253,7 @@ void convert(struct laser *point, struct angle *angle1, struct angle *angle2, in
 
 void flat_convert(struct laser *point, struct angle *angle1, struct angle *angle2, int *x, int *y, int *z)
 {
-        static float normalized, yaw, pitch, roll, azimuth, inclination, range;
+        static float yaw, pitch, roll, azimuth, inclination, range;
 
         if( abs(point->time - angle1->time) < abs(angle2->time - point->time) ){
             yaw = RADS_OF angle1->yaw ;

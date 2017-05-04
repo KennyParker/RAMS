@@ -12,7 +12,7 @@
 #include "spectrometer.h"
 #include "queue.h"
 #include "gimbal.h"
-
+ 
 
 void* controller(void *p)
 {
